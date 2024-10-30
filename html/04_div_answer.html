@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+	header{
+	background-color:bisque;
+	text-align: center;
+	padding: 10px;
+	
+	}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+}
+li {
+  float: left;
+}
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+li a:hover {
+  background-color: #111111;
+}
+section{
+	padding: 10px;
+	margin: 15px;
+	display: flex;
+}
+div{
+	padding: 10px;
+	margin: 15px;
+}
+#grid{
+	display: inline-grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	font-size: 90px;
+	margin: 10px;
+}
+footer{
+	text-align: center;
+}
+</style>
+<body>
+	<header>
+		<h1>div 오후과제</h1>
+		<input type="text" name="" id="search">
+		<button>검색</button>
+	</header>
+	<ul>
+		<li><a href="#search">검색창</a></li>
+		<li><a href="#img1">사진1</a></li>
+		<li><a href="#img2">사진2</a></li>
+		<li><a href="#img3">사진3</a></li>
+		<li><a href="#img4">사진4</a></li>
+		<li><a href="#inid">로그인</a></li>
+		<li><a href="#footer">footer</a></li>
+	</ul>
+	<section>
+		<div id="img1" style="width: 800px;">
+			<img src="https://picsum.photos/800/500" alt="랜덤사진">
+		</div>
+		<div id="info" style="background-color: beige">
+			<div id="id">
+				<label for="userid">아이디</label>
+				<input type="text" id="inid">
+			</div>
+			<div id="pw">
+				<label for="userpwd">패스워드</label>
+				<input type="text">
+			</div>
+			<div style="float: right;">
+				<button>로그인</button>
+			</div>
+		</div>
+	</section>
+	<section id="grid">
+		<div style="background-color: aqua;" id="img2">
+			<img src="https://picsum.photos/300/300?q=1" alt="">
+		</div>
+		<div style="background-color: darkolivegreen;" id="img3">
+			<img src="https://picsum.photos/300/300?q=2" alt="">
+		</div>
+		<div style="background-color: darkred;" id="img4">
+			<img src="https://picsum.photos/300/300?q=3" alt="">
+		</div>
+	</section>
+
+	<footer id="footer">
+		© 2024 Human 
+	</footer>
+</body>
+</html>
