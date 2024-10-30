@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  body{
+      width: 1280px;
+      height: 1024px;
+      border: 1px solid;
+      margin: 0px; /*body 바깥쪽 document 사이 공간*/
+  }
+  header{
+      /* display: inline-block; */
+      float: left;
+      width: 1280px;
+      height: 100px;
+      background-color: skyblue;
+      padding-top: 20px;
+      box-sizing: border-box;
+      /*고정시켜서 padding으로 인해 크기 늘어남 방지*/
+  }
+  nav{
+      width: 1280px;
+      height: 30px;
+      background-color: gray;
+      display: inline-block;
+  }
+  section{
+      width: 70%;
+      height: 400px;
+      background-color: aqua;
+      /* display: inline-block; */
+      float: left;
+      padding-top: 20px;
+      padding-left: 10px;
+      box-sizing: border-box;
+  }
+  aside{
+      width: 30%;
+      height: 400px;
+      /* display: inline-block; */
+      float: left;
+      background-color: blue;
+  }
+  #display{
+      display: inline-block;
+      width: 100%;
+      height: 200px;
+      background-color: brown;
+  }
+  footer{
+      /* display: inline-block; */
+      float: left;
+      width: 100%;
+      height: 30px;
+      border: 1px dotted;
+      text-align: center;
+  }
+  .header_01{
+    width: 1000px;
+    height: 30px;
+    border: 1px solid;
+    text-align: center;
+    margin: 0px auto; /*가운데 정렬*/
+  }
+  .header_01 h2{
+    display: inline;
+    color: white;
+  }
+  nav ul li{
+    display: inline-block;
+    width: 100px;
+    border: 1px solid;
+    margin-left: 5px;
+    text-align: center;
+  }
+  nav ul li:hover{
+    background-color: red;
+  }
+  nav ul{
+    border: 1px solid;
+    margin-top: 3px;
+  }
+  .display_01{
+    width: 24%;
+    height: 150px;
+    margin-left: 10px;
+    margin-top: 10px;
+    float: left;
+    border: 1px solid;
+  }
+  aside div{
+    width: 300px;
+    height: 200px;
+    margin: 0px auto;
+    background-color: chartreuse;
+  }
+    table{
+    margin-top: 20px;
+    border: 1px solid;
+    width: 300px;
+    height: 150px;
+  }
+  tr, td, th{
+    border: 1px solid;
+  }
+  td{
+    text-align: center;
+  }
+  th{
+    background-color: gray;
+  }
+  th:hover{
+    background-color: aqua;
+  }
+</style>
+<body>
+    <!-- <div id="header"></div> -->
+    <header><!--시멘틱 태그-->
+      <div class="header_01">
+        <h2>프로그램은 맛있다!</h2>
+      </div>
+      <div class="header_01">
+        <form action="" method=""><!--form 태그 생성해야 데이터 처리가능-->
+          <input type="text" size="50">
+          <input type="submit" value="search">
+        </form>
+      </div>
+    </header>
+    <nav>
+      <ul>  <!--목록태그 ul의 자식이 4개-->
+        <li><span>홈으로</span></li>
+        <li><span>홈으로</span></li>
+        <li><span>홈으로</span></li>
+        <li><span>홈으로</span></li>
+      </ul>
+    </nav>
+    <section>
+      <div>
+        <span>오늘의 그림</span>
+        <img src="./img/section.jfif" alt="">
+        <!--개발자는 src에서 상대경로(현재위치(.)에 따라)
+              와 절대경로(경로가 루트(시작점)부터 지정)를 숙지한다.
+        이미지 주소는 로컬에 있는 이미지나 웹에 있는 이미지 모두 가능-->
+      </div>
+    </section>
+    <aside>
+      <div>
+        <form action=""method>
+          <table>
+            <tr><td colspan="2">회원이 되어 주셔서 감사합니다.</tr>
+            <tr><td>ID</td><td><input type="text"></td></tr>
+            <tr><td>PASSWORD</td><td><input type="password"></td></tr>
+            <tr>
+              <td colspan="2">
+                <input type="button" value="가입">
+                <input type="submit" value="로그인">
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </aside>
+    <div id="display">
+      <div class="display_01">
+        <h3>자장면</h3>
+        <hr>
+        <p>자장면은 맛있다.</p>
+      </div>
+      <div class="display_01">
+        <h3>자장면</h3>
+        <hr>
+        <p>자장면은 맛있다.</p>
+      </div>
+      <div class="display_01">
+        <h3>자장면</h3>
+        <hr>
+        <p>자장면은 맛있다.</p>
+      </div>
+      <div class="display_01">
+        <h3>자장면</h3>
+        <hr>
+        <p>자장면은 맛있다.</p>
+      </div>
+      
+    </div>
+    <footer>개발자 정보</footer>
+</body>
+</html>

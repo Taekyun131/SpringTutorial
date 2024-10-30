@@ -1,0 +1,18 @@
+**html 작성 요령
+1. 제일 먼저 body 공간분할
+   시멘틱 태그와 div 사용해 공간 분할 후 세부적인 디자인
+2. display 조작하기-inline, block, inline-block
+   div 내 요소 가운데 정렬-margin 0px auto;
+   text 가운데 정렬-text-align: center;
+3. 현재위치에서의 부모, 자식, 형제 요소들 파악하기>>css에서 사용
+   부모: 가장 가까운 상위요소
+   형제: 같은 부모를 가진 요소
+   선택자>>	id- "#~" 		class- ".~" 	자식- " ~"
+4. border 를 활용해 공간파악>>요소배치 후 주석처리
+5. img태그의 절대경로와 상대경로 숙지
+   절대경로: 루트위치부터 경로 설정
+   상대경로: 현재위치부터 경로 설정
+6. input태그 생성시 form태그를 생성>>데이터 처리가 가능
+7. 해당요소 기준 외부요소와 간격-margin
+   해당요소 기준 내부요소와 간격-padding
+8. table 태그에서 열-tr 행-td, 열 합치기-colspan, 행 합치기-rowspan

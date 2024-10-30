@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  table{
+    border: 1px solid;
+    width: 300px;
+    height: 150px;
+  }
+  tr, td, th{
+    border: 1px solid;
+  }
+  td{
+    text-align: center;
+  }
+  th{
+    background-color: gray;
+  }
+  th:hover{
+    background-color: aqua;
+  }
+</style>
+<body>
+  <!--table 태그
+    1. row >> <tr>
+    2. column >> <td>
+    3. row 합치는 것 >> rowspan
+    4. col 합치는 것 >> colspan -->
+    <!-- <table>
+      <tr><th>번호</th><th>이름</th><th>매력</th><th>수정/삭제</th></tr>
+      <tr><td>1</td><td rowspan="2">홍길동</td><td>aa</td><td>수정/삭제</td></tr>
+      <tr><td>aa</td><td>aa</td><td colspan="2">aa</td></tr>
+    </table> -->
+    <table>
+      <tr><td colspan="2">회원이 되어 주셔서 감사합니다.</tr>
+      <tr><td>ID</td><td><input type="text"></td></tr>
+      <tr><td>PASSWORD</td><td><input type="password"></td></tr>
+      <tr>
+        <td colspan="2">
+          <input type="button" value="가입">
+          <input type="submit" value="로그인">
+        </td>
+      </tr>
+    </table>
+</body>
+</html>
