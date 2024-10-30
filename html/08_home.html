@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+  src="https://kit.fontawesome.com/68dda164c0.js"
+  crossorigin="anonymous"></script>
+</head>
+<style>
+  body{
+    margin: 15px;
+    width: 1280px;
+    height: 1500px;
+    border: 1px solid;
+  }
+  header{
+    padding-left:30px ;
+    padding-top: 30px;
+    width: 100%;
+    height: 150px;
+    border: 1px solid;
+    box-sizing: border-box;
+    background-color: bisque;
+  }
+  nav{
+    background-color:rgba(101, 226, 43, 0.507);
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    float: left;
+  }
+  #menu{
+    font-size: 20px;
+    margin-left:20px ;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    
+  }
+  #menu li a{
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+  }
+  #menu li a:hover{
+    background-color: rgba(0, 0, 0, 0.418);
+  }
+  aside{
+    margin: 5px;
+    float: left;
+    width: 300px;
+    height: 1150px;
+    border: 1px solid;
+  }
+  section{
+    margin: 5px;
+    float: left;
+    width: 950px;
+    height: 1150px;
+    border: 1px solid;
+  }
+  footer{
+    margin: 5px;
+    float: left;
+    width: 1265px;
+    height: 50px;
+    border: 1px solid;
+    text-align: center;
+  }
+  #search{
+    float: left;
+    margin-left: 450px;
+    margin-top: 10px;
+  }
+  #photo img{
+    width: 200px;
+    height: 200px;
+    margin-top: 80px;
+    margin-left: 50px;
+    border: 1px solid;
+    border-radius: 30%;
+  }
+  aside ul{
+    list-style-type: none;
+  }
+  #drop{
+    list-style-type: none;
+    border: 1px solid;
+    width: 100px;
+  }
+  section table{
+    margin-top: 20px;
+    margin-left: 30px;
+    height: 1000px;
+    width: 900px;
+    border: 1px solid;
+  }
+  td{
+    border: 1px solid;
+    width: 300px;
+  }
+  table img{
+    width: 400px;
+    height: 200px;
+  }
+</style>
+<body>
+  <header>
+    <h1><a href="#"><i class="fa-solid fa-layer-group"></a></i><span>   </span>코딩 공부</h1>
+  </header>
+  <nav>
+    <div>
+      <ul id="menu">
+        <li><a href="#header"><i class="fa-solid fa-house"></i>HOME</a></li>
+        <li><a href="#html"><i class="fa-brands fa-html5"></i>HTML</a></li>
+        <li><a href="#js"><i class="fa-brands fa-js"></i>JS</a></li>
+        <li><a href="#"><i class="fa-brands fa-java"></i>JAVA</a></li>
+        <li><a href="#"><i class="fa-solid fa-database"></i>DB</a></li>
+        <li><a href="#"><i class="fa-solid fa-leaf"></i>SPRING</a></li>
+      </ul>
+      <div >
+        <form action="" method="" id="search">
+          <input type="text" size="20">
+          <button type="submit" >검색</button>
+        </form>
+      </div>
+    </div>
+    
+  </nav>
+  <aside>
+    <div id="photo">
+      <img src="https://picsum.photos/200/200" >
+    </div>
+    <ul>
+      <li><i class="fa-solid fa-envelope"></i><span> </span>stk131@naver.com</li>
+      <li>
+        <a href="https://github.com/Taekyun131">
+         <i class="fa-brands fa-github"></i>
+        </a> github.com/Taekyun131
+      </li>
+    </ul>
+  </aside>
+  <section>
+    <table>
+      <tr id="html">
+        <td><img src="./img/화면 캡처 2024-10-30 164344.png"></td>
+        <td><img src="./img/화면 캡처 2024-10-30 170800.png"></td>
+      </tr>
+      <tr id="js">
+        <td><img src="./img/화면 캡처 2024-10-30 171326.png" alt=""></td>
+        <td><img src="./img/화면 캡처 2024-10-30 171712.png" alt=""></td>
+      </tr>
+      <tr id="java">
+        <td></td>
+        <td></td>
+      </tr>
+      <tr id="db">
+        <td></td>
+        <td></td>
+      </tr>
+      <tr id="spring">
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </section>
+  <footer><h4>corporate Human</h4></footer>
+</body>
+</html>
