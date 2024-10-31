@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>계산기</title>
+</head>
+<script>
+  function cal(){
+    var result=eval(print.innerText);
+    // out=result;
+    var result=document.getElementsByTagName('h3')[0].innerText;
+   document.getElementById('out').innerText
+   = document.getElementsByTagName('h3')[0].innerText
+      =eval(document.getElementsByTagName('h3')[0].innerText);
+
+  }
+  function insert(a){
+    var inVal=a.value;
+    var print=document.getElementById('out');
+    var out=document.getElementsByTagName('h3')[0].innerText+=inVal;
+    print.innerText=out;
+    }
+</script>
+<style>
+  body{
+    margin: 15px;
+  }
+  table{
+    text-align: center;
+    padding: 10px;
+    width: 500px;
+    height: 900px;
+    border: 1px solid;
+
+  }
+  input{
+    font-size: 100px;
+  }
+  textarea{
+    font-size: 40px;
+    width: 450px;
+    height: 120px;
+  }
+  td{
+    border: 1px solid;
+  }
+</style>
+<body>
+  <table>
+    <tr  >
+      <td colspan="3" rowspan="2"><textarea name="" id="out"></textarea></td>
+    </tr>
+    <tr>
+      
+    </tr>
+    <tr>
+      <td><input type="button" value="1" onclick="insert(this)"></td>
+      <td><input type="button" value="2" onclick="insert(this)"></td>
+      <td><input type="button" value="3" onclick="insert(this)"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="4" onclick="insert(this)"></td>
+      <td><input type="button" value="5" onclick="insert(this)"></td>
+      <td><input type="button" value="6" onclick="insert(this)"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="7" onclick="insert(this)"></td>
+      <td><input type="button" value="8" onclick="insert(this)"></td>
+      <td><input type="button" value="9" onclick="insert(this)"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="+" onclick="insert(this)"></td>
+      <td><input type="button" value="0" onclick="insert(this)"></td>
+      <td><input type="button" value="-" onclick="insert(this)"></td>
+    </tr>
+    <tr>
+      <td><input type="button" value="*" onclick="insert(this)"></td>
+      <td><input type="button" value="=" onclick="cal()"></td>
+    </tr>
+  </table>
+  <h3></h3>
+</body>
+</html>
