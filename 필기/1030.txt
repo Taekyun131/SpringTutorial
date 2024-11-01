@@ -1,5 +1,5 @@
 **html 작성 요령
-1. 제일 먼저 body 공간분할
+1. 제일 먼저 body 공간분할(width, height, margin, padding)
    시멘틱 태그와 div 사용해 공간 분할 후 세부적인 디자인
 2. display 조작하기-inline, block, inline-block
    div 내 요소 가운데 정렬-margin 0px auto;

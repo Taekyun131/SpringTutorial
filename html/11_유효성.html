@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <form action="">
+      <span>id</span><input type="text" id="id">
+      <span>pwd</span><input type="text" id="pwd">
+      <input type="button" value="전송" onclick="test()">
+    </form>
+  </div>
+</body>
+</html>
+<script>
+  function test(){
+    let id=document.getElementById('id').value;
+    let pwd=document.getElementById('pwd').value;
+    // alert(id+"/"+pwd);
+    // console.log(id.length);
+    if(id.length<8){
+      alert('아이디는 8글자 이상이어야 합니다');
+      return;
+    }
+    if(pwd.length<4){
+      alert('비밀번호는 4글자 이상이어야 합니다.');
+      return;
+    }
+  }
+</script>

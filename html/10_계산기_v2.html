@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .btn{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 1px solid;
+    text-align: center;
+  }
+</style>
+
+<body>
+  <h2>계산기</h2>
+  수식<span id="k"></span> <br>
+  <div class="btn" >1</div>
+  <div class="btn" >2</div>
+  <div class="btn" >3</div><br>
+  <div class="btn" >4</div>
+  <div class="btn" >5</div>
+  <div class="btn" >6</div><br>
+  <div class="btn" >7</div>
+  <div class="btn" >8</div>
+  <div class="btn" >9</div><br>
+  <div class="btn" >0</div>
+  <div class="btn" >+</div>
+  <div class="btn" >-</div><br>
+  <div class="btn" >=</div>
+</body>
+</html>
+<script>
+  //이벤트 처리를 위한 리스너: 이벤트 리스너, 마우스 리스너
+  //지금 사용해본 것: click, change
+  //마우스 동작: mouseup,mousedown
+  //키보드 동작: keyup, keydown
+  // 리스너를 등록하는 방법은 크게 2가지
+  //  1. html태그에서 함수를 지정하는 방법...10계산기.html
+  //  2. 자바스크립트에서 리스너에 등록하는 방법
+
+  //함수영역이 아니라 문서가 로딩될 때
+  //여기서 작성하는 코드는 실행이 된다는 의미
+  //함수로 작성한코드는 콜이 될 때 실행되는 것
+  
+  //리스너 등록(람다식 활용)
+  //  함수를 간결하게 표현
+  //  코드를 여러줄 처리하기 위해
+  //  함수로 묶어서 정의하는 경우
+  //  코드의 재사용성 보다 간단한 기능 정의
+  //이벤트 등록, 이벤트 처리시 일반적으로 람다식을 많이 사용
+  // document.getElementsByClassName('btn')[0].addEventListener('click',()=>{cal(1)})
+  // document.getElementsByClassName('btn')[1].addEventListener('click',ttt)
+  // document.getElementsByClassName('btn')[2].addEventListener('click',
+  //   ()=>{
+  //     alert('tt aaa');
+  //   })
+  // document.getElementsByClassName('btn')[2].addEventListener('click',
+  //   ()=>{
+  //     alert('tt aaa');
+  //   })
+
+  //계산기에서 모든 버튼은 이벤트에 등록되어야 한다.
+  //html에서 onclick을 하거나 자바스크립트에서 리스너 등록을 해야한다
+  //이번 예제는 자바스크립트에서 리스너를 등록
+  var allBtn=document.getElementsByClassName('btn');
+  for(let i=0;i<allBtn.length;i++){
+    let s=allBtn[i].innerHTML;
+    allBtn[i].addEventListener('click',()=>{cal(s)})
+  }
+
+
+
+  function ttt(){
+    alert('aaa');
+  }  
+  const tt=()=>{
+    alert('tt aaa');
+  }
+  function cal(a){
+    // alert(a);
+    if(a=='='){
+      let ab=document.getElementById('k');
+      let c=ab.innerText;
+      ab.innerText=eval(c);
+    }else{
+      let ab=document.getElementById('k');
+      ab.innerText=ab.innerText+a;
+     }
+  }
+</script>

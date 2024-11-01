@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #abcd {
+    width : 600px;
+  }
+  .swordspan{
+    background-color:aqua;
+  }
+  .yellow{
+    background-color: yellow;
+  }
+
+</style>
+<script>
+  function sfun(){
+    var w = document.getElementById("abc").innerHTML;  // 본문을 저장할 변수 선언
+    var sw = document.getElementById("sword").value;   // 검색어를 저장할 변수 선언  
+    let s=document.getElementById('abc');
+    // let a=w.search(sw);
+    let a=w.indexOf(sw);
+    // alert(w.slice(a));
+    let count=0;
+    // alert(w.slice(b+1));
+    let b=w.slice(a, a+sw.length);
+    // alert(b);
+    s.innerHTML=s.innerHTML.replaceAll(sw,'<span class="yellow">'+sw+'</span>');
+    while(true){
+      if(a>0){
+        count++;
+        w=w.slice(a+1);
+        a=w.indexOf(sw);
+      }else{
+
+        break;
+      }
+    }
+    alert(count+"개 찾았습니다");
+  }
+  
+</script>
+<body>
+  <div id="abcd">
+    <span id="abc">
+    주말 이틀 연속 코로나19 하루 신규 확진자가 10만명대를 
+    기록하는 등 유행 규모가 감소세를 이어갔다. 
+    정부가 방역·의료체계의 일상회복을 
+    목표로 한 ‘포스트 오미크론 대응체계’를 준비하는 가운데 
+    11일부터는 보건소 선별진료소와 임시선별진료소에서 코로나19 신속항원검사가 중단된다.
+    </span>
+    <br>
+    찾을 문자열 <input type="text" id="sword"> 
+    <input type="button" onclick="sfun()" value="검색">
+    
+  </div>   
+</body>
+</html>

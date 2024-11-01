@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width==device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   .blue{
+    color: blue;
+  }
+</style>
+<body>
+    <h1> 주문메뉴 </h1>
+    <div id="info"></div>
+    메뉴선택 <input type="text" id="inputMenu">
+    수량 <input type="number" id="수량" >   
+    <input type="button" onclick="order()" value="주문"> 
+    <br>주문정보 <div id="order_info"></div>
+    <hr>
+</body>
+<script>
+    var menu = ['자장면','볶음밥','탕수육']
+    // node.js로 실행하지 말고, 웹브라우저로 실행하여서 해결하시오.
+    // 05answer02.html
+    // 1. 위 1번과 2번 동일하다.
+    // 2. 메뉴선택 옆에 수량을 입력하도록 html을 수정 한다.
+    // 3. 주문을 입력하여 메뉴가 존재하면 confirm()을 띄우고, 이때 메뉴와 수량이
+    //    확인되어야 한다. 
+    // 4. 주문정보에 체크박스, 메뉴명, 수량, 삭제버튼이 나오게 한다.
+    // 5. 삭제 버튼을 누르면 주문 삭제가 가능하다.
+    window.onload=()=>{
+      menulist();
+    }
+
+    function menulist(){
+      let menuframe=document.getElementById('info');
+      for(let i=0;i<menu.length;i++){
+        menuframe.innerHTML+=menu[i]+" ";
+      }
+    }
+    
+    let cnt=0;
+    function order(){
+      let menuIn=document.getElementById('inputMenu').value;
+      let menuframe=document.getElementById('info');
+      let food=document.getElementById('order_info');
+      let number=document.getElementById('수량').value;
+      // alert(menuIn);
+      // alert(menuframe.innerHTML);
+      
+      cnt++
+      if(menuframe.innerHTML.includes(menuIn)){
+        confirm(menuIn+'이(가) ' +number +'개 주문되었습니다')
+        document.getElementById('order_info').innerHTML+='<div class="blue" id="'+cnt+'">'+menuIn+' 수량: '+number+
+          '<button class="del" id="del'+cnt+'" onclick="deletemenu('+cnt+')">삭제<button>'+'</div>';
+            // document.getElementById('del'+cnt).addEventListener('click',
+            // ()=>{deletemenu(cnt)})
+      }else{
+        alert('메뉴가 없습니다.')
+      }
+    }
+    function deletemenu(i){
+      alert('메뉴가 삭제되었습니다')
+      // alert(document.getElementById(i).innerHTML)
+      document.getElementById(i).remove();
+      // document.getElementById('del'+i).removeChild
+    }
+</script>
+</html>
