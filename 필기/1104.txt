@@ -1,0 +1,28 @@
+웹 브라우저: 컴파일 html, css, js
+
+
+
+웹 서버: 정적 서비스 처리
+-그림파일, html 문서, css, js소스>>아파치
+WAS: 동적 서비스 처리
+-데이터베이스 정보>>tomcat
+>>동적데이터 처리를 위해 Spring Framework legacy(view, template) jsp로 html로 랜더링
+
+view-클라이언트의 응답화면
+
+클라이언트 요청(request) (url) > return type html(동기방식) or int, String, Json(비동기 방식)
+js: 서버의 부담을 줄여주고 클라이언트에게 매력적인 서비스 제공
+
+1. html에서 태그, id, 클래스, 자식, 자손 등 object를 선택할 수 있어야 한다.
+2. 선택한 object에서 value, innerText, innerHTML로 데이터 조작할 수 있다.
+3. 새로운 object를 생성해서 문서에 포함시킬 수 있다.
+4. 비동기 통신-API 사용능력
+5. view js기능-메뉴 펼치기 기능, 메뉴바 고정...
+6. 객체활용-그래프 
+
+크롬 개발자 모드 사용하여 문제해결(프로젝트 때 언급)
+1. element 탐색(노드탐색 및 선택)
+2. html 문서 소스 탐색 및 구조 분석
+3. 콘솔활용-js간단한 테스팅
+4. network=request와 response 과정 분석
+		url, method, code(304, 404)
