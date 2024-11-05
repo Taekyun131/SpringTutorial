@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>티라노게임</title>
+</head>
+<body>
+  <div>
+    <span>목숨: <i id="life">5</i></span>
+    <span style="margin-left: 10px ;">점수: <i id="score">0</i></span>
+    <h2>스페이스바를 눌러 게임 시작</h2>
+    <canvas id="canvas"></canvas>
+  </div>
+</body>
+<script>
+  let canvas=document.getElementById('canvas');
+  let ctx=canvas.getContext('2d');
+
+  canvas.width=window.innerWidth-100;
+  canvas.height=window.innerHeight-100;
+  
+  //바닥선
+  ctx.beginPath();
+  ctx.moveTo(0,250);
+  ctx.lineTo(600,250);
+  ctx.stroke();
+
+  //임시캐릭터
+  // ctx.fillStyle='green';
+  // ctx.fillRect(10,10,50,50);
+
+  let dino={
+    x:10,
+    y:200,
+    width: 50,
+    height: 50,
+    draw(){
+      ctx.fillStyle='green';
+      ctx.fillRect(this.x,this.y,this.width,this.height);
+    }
+  }
+  dino.draw();
+  
+  class Cactus{
+    constructor(){
+      this.width=50+getRandomInt(-5,6);
+      this.height=50+getRandomInt(-5,6);
+      this.x=500;
+      this.y=250-this.height;
+    }
+    draw(){
+      ctx.fillStyle='red';
+      ctx.fiilRect(this.x,this.y,this.width,this.height);
+    }
+  }
+  let cactus=new Cactus();
+  cactus.draw();
+
+  function getRandomInt(min,max){
+    min=Math.ceil(min);
+    max=Math.floor(max);
+    return Math.floor(Math.random()*(max-min)+min);
+  }
+</script>
+</html>

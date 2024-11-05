@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>개발자 이환수</title>
   <style>
     body {
       margin: 0;
@@ -174,6 +174,7 @@
       opacity: 1
     }
   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -185,7 +186,7 @@
         <li>오늘출발 상품은 판매자 설정 시점에 따라 오늘출발 여부가 변경될 수 있으니 주문 시 꼭 다시 확인해 주시기 바랍니다.</li>
       </ul>
     </div>
-    <table class="cart__list" >
+    <table class="cart__list">
       <form>
         <thead>
           <tr>
@@ -229,11 +230,12 @@
           <tr>
             <td colspan="2"><input type="checkbox"> <input type="button" class="cart__list__optionbtn"
                 onclick="delRow()" value="선택상품삭제">
-              <button class="cart__list__optionbtn">선택상품 찜</button>
+              <button type="button" class="cart__list__optionbtn">선택상품 찜</button>
             </td>
             <td></td>
-            <td style="text-align: center;"> 선택상품금액 :  <span id="allGoods"></span> + 총 배송비 :  <span id="allDlv"></span></td>
-            <td style="text-align: center; color: limegreen; border-left: 1px lightgray solid;"> 주문금액 : <span id="allPri"></span></td>
+            <td style="text-align: center;"> 선택상품금액 <span id="allGoods"></span> + 총 배송비 <span id="allDlv"></span></td>
+            <td style="text-align: center; color: limegreen; border-left: 1px lightgray solid;"> 주문금액 <span
+                id="allPri">0 원</span></td>
           </tr>
         </tfoot>
       </form>
@@ -243,11 +245,13 @@
       <form>
         <thead>
           <tr>
+
             <td>상품정보</td>
             <td>옵션</td>
             <td>상품금액</td>
             <td>배송비</td>
-          </tr>          
+          </tr>
+
         </thead>
         <tbody>
           <tr class="cart__list__detail">
@@ -273,71 +277,81 @@
 </body>
 
 <script>
-  function addRow(){
-  document.getElementById('hidden').innerText='';
-  let name=document.getElementById('goodsInfo').value;
-  let quantity=document.getElementById('goodsCnt').value;
-  let price=document.getElementById('goodsPrice').value;
-  let fee=document.getElementById('goodsDlv').value;
-  let newOrder=cart__list.insertRow();
-  let cell1=newOrder.insertCell(0);
-  let cell2=newOrder.insertCell(1);
-  let cell3=newOrder.insertCell(2);
-  let cell4=newOrder.insertCell(3);
-  let cell5=newOrder.insertCell(4);
-  cell1.innerHTML="<input type=\"checkbox\" class=\"check\">";
-  cell2.innerHTML=name;
-  cell3.innerHTML=quantity;
-  cell4.innerHTML=price;
-  cell5.innerHTML=fee;
-  calMoney();
-}
-function calMoney(){
-  let calPrice=0;
-  let calFee=0;
-  let calTotal=0;
-  for(let i=0;i<cart__list.rows.length;i++){
-    calPrice+=Number(cart__list.rows[i].cells[3].innerText)*
-    Number(cart__list.rows[i].cells[2].innerText);
-    calFee+=Number(cart__list.rows[i].cells[4].innerText);
-  }
-  calTotal=calPrice+calFee;
-  // alert(calPrice);
-  // alert(calFee);
-  // alert(calTotal);
-  document.getElementById('allGoods').innerText=calPrice+'원';
-  document.getElementById('allDlv').innerText=calFee+'원';
-  document.getElementById('allPri').innerText=calTotal+'원';
-}
 
-function delRow(){
-  for(let i=0;i<cart__list.rows.length;i++){
-    if(cart__list.rows[i].cells[0].children[0].checked){
-      cart__list.deleteRow(i);
-      i--;
+  const cartList = document.getElementById("cart__list");
+
+  var totalGoodsPrice = 0;
+  var totalDlvPrice = 0;
+  var totalPrice = 0;
+
+  function allChk1() {
+    let flag = document.getElementById('allChk').checked;
+    //let flag = $('#allChk').prop('checked');    // 위 코드를  jquery로 바꾸면 이렇게 됨
+    for (let i = 0; i < cartList.rows.length; i++) {
+      cartList.rows[i].cells[0].children[0].checked = flag;
     }
   }
-  calMoney();
-}
 
-function allChk1(){
-  for(let i=0;i<cart__list.rows.length;i++){
-    if(document.getElementById('allChk').checked){
-      document.getElementsByClassName('check')[i].checked=true;
-    }else{
-      document.getElementsByClassName('check')[i].checked=false;
+  function addRow() {
+    if ($("#goodsInfo").val() == "") {
+      alert("상품명을 입력하세요.");
+      return;
+    }
+    let price = parseInt($("#goodsPrice").val());
+    if (price != $("#goodsPrice").val() || price <= 0) {
+      alert("상품금액을 입력하세요.");
+      return;
+    }
+    let dlvPrice = parseInt($("#goodsDlv").val());
+    if (dlvPrice != $("#goodsDlv").val() || dlvPrice < 0) {
+      alert("배송비를 입력하세요.");
+      return;
+    }
+
+    let newOrder = cartList.insertRow(cartList.rows.length);
+    let cell1 = newOrder.insertCell().innerHTML = "<input class=\"orderEntity\" type=\"checkbox\">";
+    let cell2 = newOrder.insertCell(1).innerHTML = $("#goodsInfo").val();
+    let cell3 = newOrder.insertCell(2).innerHTML = $("#goodsCnt").val() + " 개";
+    let cell4 = newOrder.insertCell(3).innerHTML = $("#goodsPrice").val() + " 원";
+    let cell5 = newOrder.insertCell(4).innerHTML = $("#goodsDlv").val() + " 원";
+    updatePrice($("#goodsCnt").val(), $("#goodsPrice").val(), $("#goodsDlv").val(), true);
+
+    if (cartList.rows.length > 0) {
+      document.getElementById("hidden").hidden = true;
     }
   }
-}
 
-//   위 코드에 기능추가
-// 1. 장바구니 상품 등록
-// 2. 수량조절 가능하게 하기
-// 3. 상품리스트에서 선택 삭제 가능 (다중 선택 삭제도 가능)
-// 4. 상품리스트에 올라가면 자동으로 계산하기
- 
-  
 
+  function delRow() {
+    for (let i = 0; i < cartList.rows.length; i++) {
+      if (cartList.rows[i].cells[0].children[0].checked) {
+        let quantity = cartList.rows[i].cells[2].innerHTML.replace(" 개", "");
+        let priceEach = cartList.rows[i].cells[3].innerHTML.replace(" 원", "");
+        let deliveryPrice = cartList.rows[i].cells[4].innerHTML.replace(" 원", "");
+        updatePrice(quantity, priceEach, deliveryPrice, false);
+        cartList.deleteRow(i--);
+      }
+    }
+
+    if (cartList.rows.length == 0) {
+      document.getElementById("hidden").hidden = false;
+    }
+  }
+
+  function updatePrice(quantity, priceEach, deliveryPrice, isAdd) {
+    if (isAdd) {
+      totalGoodsPrice += parseInt(quantity) * parseInt(priceEach);
+      totalDlvPrice += parseInt(deliveryPrice);
+    } else {
+      totalGoodsPrice -= parseInt(quantity) * parseInt(priceEach);
+      totalDlvPrice -= parseInt(deliveryPrice);
+    }
+    totalPrice = totalGoodsPrice + totalDlvPrice;
+    $("#allGoods").html(String(totalGoodsPrice) + " 원");
+    $("#allDlv").html(String(totalDlvPrice) + " 원");
+    $("#allPri").html(String(totalPrice) + " 원");
+  }
 </script>
 
 </html>
+<!-- add carts and show total price -->

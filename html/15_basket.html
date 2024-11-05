@@ -287,18 +287,28 @@
   let cell5=newOrder.insertCell(4);
   cell1.innerHTML="<input type=\"checkbox\" class=\"check\">";
   cell2.innerHTML=name;
-  cell3.innerHTML=quantity+'개';
-  cell4.innerHTML=price+'원';
-  cell5.innerHTML=fee+'원';
-  let totalPrice=document.getElementById('allGoods').innerText;
-  let totalFee=document.getElementById('allDlv').innerText;
-  let totalMoney=document.getElementById('allPri').innerText;
-  document.getElementById('allGoods').innerText=Number(totalPrice)+Number(quantity*price);
-  document.getElementById('allDlv').innerText=Number(totalFee)+Number(fee);
-  document.getElementById('allPri').innerText=Number(totalMoney)+Number(quantity*price)+Number(fee);
-  
+  cell3.innerHTML=quantity;
+  cell4.innerHTML=price;
+  cell5.innerHTML=fee;
+  calMoney();
 }
-
+function calMoney(){
+  let calPrice=0;
+  let calFee=0;
+  let calTotal=0;
+  for(let i=0;i<cart__list.rows.length;i++){
+    calPrice+=Number(cart__list.rows[i].cells[3].innerText)*
+                Number(cart__list.rows[i].cells[2].innerText);
+    calFee+=Number(cart__list.rows[i].cells[4].innerText);
+  }
+  calTotal=calPrice+calFee;
+  // alert(calPrice);
+  // alert(calFee);
+  // alert(calTotal);
+  document.getElementById('allGoods').innerText=calPrice+'원';
+  document.getElementById('allDlv').innerText=calFee+'원';
+  document.getElementById('allPri').innerText=calTotal+'원';
+}
 
 function delRow(){
   for(let i=0;i<cart__list.rows.length;i++){
@@ -307,18 +317,19 @@ function delRow(){
       i--;
     }
   }
+  calMoney();
 }
 
 function allChk1(){
-  if(document.getElementById('allChk').checked){
-    for(let i=0;i<cart__list.rows.length;i++){
+  for(let i=0;i<cart__list.rows.length;i++){
+    if(document.getElementById('allChk').checked){
       document.getElementsByClassName('check')[i].checked=true;
-    }
-  }else{
-    for(let i=0;i<cart__list.rows.length;i++){
+    }else{
       document.getElementsByClassName('check')[i].checked=false;
     }
   }
+  
+
 }
 
 //   위 코드에 기능추가
