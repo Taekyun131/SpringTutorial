@@ -9,58 +9,193 @@
   <div>
     <span>목숨: <i id="life">5</i></span>
     <span style="margin-left: 10px ;">점수: <i id="score">0</i></span>
-    <h2>스페이스바를 눌러 게임 시작</h2>
+    <h2>스페이스바 눌러 게임 시작</h2>
     <canvas id="canvas"></canvas>
   </div>
 </body>
 <script>
+  alert('스페이스바로 게임시작\n 점프: 스페이스바');
   let canvas=document.getElementById('canvas');
   let ctx=canvas.getContext('2d');
-
+  let timer=0;
+  let cactusArr=[];
+  let gameStart=false;
+  let jump=0;
+  let jumpTimer=0;
+  let animation;
+  let life=5;
+  let score=0;
+  //canvas 크기설정
   canvas.width=window.innerWidth-100;
   canvas.height=window.innerHeight-100;
   
-  //바닥선
-  ctx.beginPath();
-  ctx.moveTo(0,250);
-  ctx.lineTo(600,250);
-  ctx.stroke();
-
-  //임시캐릭터
-  // ctx.fillStyle='green';
-  // ctx.fillRect(10,10,50,50);
-
+  //캐릭터 생성
   let dino={
-    x:10,
+    x:20,
     y:200,
     width: 50,
     height: 50,
     draw(){
-      ctx.fillStyle='green';
-      ctx.fillRect(this.x,this.y,this.width,this.height);
+      // 임시 캐릭터(색칠된 직사각형 그리기)
+      // ctx.fillStyle='green';  
+      // ctx.fillRect(this.x,this.y,this.width,this.height);
+      //이미지로 캐릭터 그리기 
+      ctx.drawImage(dinoImg,this.x,this.y);
     }
   }
-  dino.draw();
+  // dino.draw();
   
+  //캐릭터 이미지생성
+  let dinoImg=new Image();
+  dinoImg.src='https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbao93P%2FbtrFzxDXVKE%2F6UVEqy6ZE22Tyo6dXuDWjk%2Fimg.png';
+
+
+  //장애물 생성
   class Cactus{
     constructor(){
-      this.width=50+getRandomInt(-5,6);
-      this.height=50+getRandomInt(-5,6);
+      this.width=40+getRandomInt(-5,6);
+      this.height=40+getRandomInt(-5,6);
       this.x=500;
       this.y=250-this.height;
     }
     draw(){
-      ctx.fillStyle='red';
-      ctx.fiilRect(this.x,this.y,this.width,this.height);
+      // ctx.fillStyle='red';
+      // ctx.fillRect(this.x,this.y,this.width,this.height);
+      ctx.drawImage(cactusImg,this.x,this.y,this.width,this.height);
     }
   }
   let cactus=new Cactus();
-  cactus.draw();
+  // cactus.draw();
+  
+  //장애물 이미지생성
+  let cactusImg=new Image();
+  cactusImg.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAS0AAACnCAMAAABzYfrWAAAAhFBMVEX///8AAADm5ubl5eXk5OTj4+P09PTx8fH4+Pju7u719fXq6ur7+/tpaWlmZmahoaFXV1ewsLBvb2+3t7fd3d14eHhFRUWVlZXDw8PT09PMzMwcHByMjIyoqKienp5AQEAWFhZUVFQqKipLS0syMjKDg4M3NzcNDQ1eXl58fHwgICArKytxl8MQAAAS20lEQVR4nO1de0PrKgyvfVOqm1un23RTj4+rx+///W6BQoEGCm33cB7+ubnHZgm/0hBCAkFAWhyGISZEHoVhhAiVEiolFCJUTihcPxYLhpAQZcwZCvJYRqgMYCDPR4CsTMgquKy47MqiDGWkyEpNsiJZOV1WBsgKu7JgIIJ/aP1D69BoReyhGEar6UHkjFacqwwKWpIsL7SErFxBS5cl0JJkuaNlAyIQfWEPEYo9RCj2EKHE6wtVhlIwFIRiCgkGyioUCgVDKysTsgqjLFw3RblskyHMlMtUBkAWUmVlqqxSk2UHIojrxjBLaoo9WVMJ+2lCMV3qPybszQlKYYjZTxMGpgt5jCmvMLBuCIaCMKSqrAxzhlo1onJRpAlGCDWy8P7q4z5hrFZZ2CSLMmj9SlyAaF+E1QKpwxayQO2wFeM86v+mIAs0W2f8+83w+vH1zxVpH9c7zGRld/T/N3iwtXM0xXkHiPNDa3N1tcwYw2Z1pbS7JbFKCfsfYp5OgFakPxSHHXstoRX1mMRY74HCoL+ZWLfXFUHikYgPb6467b9livaUuikBWYBykCwEzA2Acl0giAnFZd1yQiBCFYTKCJURqiAUIlROKMFQAgwpoVLBmgtWlaGVpTEUZf4fxWIVBPddrEh7DZ/of5c5oJxJlqNyfUBQWCGTmKomkY2SPnsdsxcB2FAymcSqrFwwSHND+tGA8vkJgyVa5GuvJeV85gYZiEB8s+fhneLqrQcljmb2z5dHEU5fnNBa4tOhFUXcXtcUe6im4uahmmrsdU1RhqSmGoU4Q0EYGoVqKlcZIkGpsjIhq+lBFKYLF7Qwnxu6ssjvRiZZmSwr4nNDFCUqQwkCEeSkIdIIURAiI1RKqJRQGaEK5TEjQ6YyZF0GB1nBTMFlW/ujRaGBtSgdlMuFhEJVzrtfDQN56dxe11TjLotRUuPKbSiHPxIvgjyGBUP7IhobWj9WqqxJV1Yh3lwrK1sqwNDnYg2tuTJKhKww7igHyUJAvxIxItV+KUCcn3caIBUY2hn8n263QAv0+3z54FHFpaI/91c3XGPiPIPRirr2Oo/lAajb0FAx9cKGdr5EZW5oBzs0N6SqrCsntJa51V4nsr2GvsS2X62B7wUiI62oW6pSKaEyEwUw2FkLG6vCUN5qsGzy+rHySUfrKRgvy7lfzWOB9iJUe92aROMoUW2oPiKVuUGMyLgdkboHEUdorsGyDYmsOx2tK2ySFQP2WlVOnxuAEQkCwdA6I+80RDoqW0wYumjtTLJ+jS+fYrTtRev7jrSn91OhZbLXrUmc9EuMgC8xQvvZbLbfz1YdtBDGSEbrllnbUpMVTfolgkAwK5+SplKpSpkeM7L6MhS486k17X65m+1nf9p/mOUjZfkzNJSPB8Hgd/UgrCMSmtVNaHXaHjus+IZ7ENDo50CcjXfqj9Zv9uXd0ZqhVLCezJdvV9XKAJxwVV1LNK+qjXar0963203dtrjHXk+8qiZfohqesEdsgACMMWLTDYoEXw+4JAwZ84lTjXXN2oszarirXDFUOXOIR4nYsFE4bTQQWF1GUUZ2Jeo1X1isV89XxLkEooEZzq6d0coCr2hgx4MYEA0U3+yBvVO0pj3cButn1tewBH155IvWJfryeN10ke8RPlJZ4U9ECzCJaU0l+qraGgW1RlzxTutqTmxoWNHfJYOd71p5ogXa6ziK7VFQn4irDEQA7Ijad1+RbZfSvMHJ9qBF26eEIXh6LLTd16AZfHNiZ+mOaP5iQCtEDeuw3VdgV7kPiEE7+5EYtp2d/di8s4/lgN42Jckz9Qq6CrWd/QatT/6JhIEewuEtGbCzHwvj0tnZjxyAOKZ3Kkddrqv6dx+urr6yJjuKy5LRivrQumRfPn2QO/tVEFv2gKsKDUMrxjyp7mhoqdluPKHsMNlumaHbe/rHJqPB/UvcVFVFtTtethv9QSlZkdg12u+aahII639qkhUJxbTiDJS1yaTkrMQkNsmKgoHa642h2zPUMnDvdI6TJKFcuBs2ldoSNcqhccqFABBIBSLDAR+FR8jSFT5XBy0py8/Dg2BoYacsXcVej8zSPU6k+VBoXZ4vb0Vr/7PQUkxioid5Jc7Zbua5gUwmMFpPq+tlKOaGxB8t0F4DmXW6cr1zQxeIw+1VA5HmJdTdfYpyWRaQbGpoi9Vqtdgosg69Vz3I37IPW6PHCKJ1jyPIO3VoPIXetYLjh3mnE6P1U3x5+3QL9CA6IVqGsQVkgPugRaYSHa1QoBXyodKOrUgeW51IVSiNLVyRPblczwdhaKEolWUNQUuWpSvX9kua3UJ5bLUMGhBtv9qZNOibCtwzwI1zYidDRkJLWS/5zIk0vgXMvwecE9Vheyh/69WOlvT9/oDY6T+0Dl3NCVbsmNaJ/WjFw9HyXic6xBAN68Q2LBv0FcUEIo7LQgqCgbIC8WnBYEerlVUzpO5oEbFW5cp+5XIDAwyEKb5lrtgZEt/KVvP55/wTDL18oaaaU41vObQkOkI1pwrEUbxT9scAXCe+FJfunU7py3+7ojVf8HZzMrQMq2r+kLKqFgtXqGLHmgFuQavutFKxY0RrySK9CGUbzgju0WvKQdnmyJAP0AsEkDEBVeyYqmh8qoMMaN1mMoMFrZTLatAKFVkjlbOzcuVog7ZooQzw4XvVUU0ZooF/Hfeq1wGX1WzkmvaqieYT7lWfKAO8Qetjw/KvNtsNq2+9CZxip+uAy5LQukhfXkbrrmCbKWXIfauPbT36WYqyxd9aBySgRVRKTotWYrDXQP6WvWLHkr8lvsS7lGdlZ62NWrzfklS35XJtdGS/ZvekzWazRwktQNaI/K2kOzco+Vu0KAaJyhaFQqIARqJUBo3VyEAzqBu0StQwlE5VrsaGcz/lRO0OpBwyMkhA9OedQnUCfnmnWlz+qZXVqSTwaq0H4Vax4593etIMcIEW9VvS8WhdtC/PvsT/3r7/PNTt7/fb809Dy/VLjKKeih2HHTJTHsRgtPwqduw7ZGLisn2J6RFbPi1a+Ji60xZYR8noGjJlREZ6DfDIpvnycA2ZxYNwG5Gnq+bsO5vm6uq1Xr/Ssq0w++h7lvaUTPsX6ctHpmOPpHaX87mhsOwTsfaHtYf74LhoDVlVD6nm7NS1dtEqeBQ07UWLtwatGPwSvas5ratqGpRgfiynUkGxohhBFSoFMKR2hn4z/xJwBtsepNr2OahcVtiVSw29sQAxJscmtnoQ0OoSffWjJRh67RZvsxRa8YXJlzkaeNQcm6H1icbMU9Hm5Ofqt55a97c7aAHeKarX3p/VD/bl4zAbt46G2z2MFj355qOa2pf3PCOpG2hUV9V6ZFKZGzqn94xoJAYcqLLaKChujqXSo7u2VXVPxDUPpPO3yr4gdikC1qVgYNH8Eo7mAwxlZUfAp5HfM8oKWJ3MY6r1S1RzlpmhNxYgAjYKfas5AZNYmHaK2IgUs/p23FJaap1qzuZzrBUJceOsJGHbr1Y5n52ik1RzCmuHI/f9VRe0JFno6Y70PsIZRi/0kUXmfar1+fjyjLV8tKMwEK2oWF1d/a3FZcsX/sgGHzoDfMR5p4kxe0I675SfHDwJWlJGA2IvIUHtGaCfaTejwfcsbOW8U2O2TE0F3WwZS0IKYZCzZZQMlva42oCvrTeoWu5mtO3qJlM7p0SbWFEu4Hmakl38KAKpX0w50S/XzBwJiAHVnPKwdcrSjVSGZg/2nf4uVY1SBS9IqlVDel0x2NRqzmAPPHLjlaV7XtWcjIEVKT4jrQeytcMzoOedhhGpQG6Vg9bs1U/25et56511Y4lHo/V4f3//KCsH+HKzQ1ZzGhOAe7PdpARguw1lH+JnlmgZaLIsN7RoU2Tlf/Q/z+FsN0MmtFM15xgPgoTerB6EnmWPaSAik9+cMiKp8XKyW7Rlsixc6umH88zsQSjKDfK37Fm63v5WBPlb2fZhFpjQQrv39/dHU3GwDS0mS1uH2tCy+ltwlu7YsTXAOw1Zza4BLU9PP9NkaeuqwWiN8eUnHVudO3YG5suDY2sqtGxja6JV9QQnpnugtd5sNmukyTKg1Ztj47aqPticmMBzYu99Pu5fYsTPEpDm3+JBfeZFqtiZYE48vnfalTVdBjiE1k/2Ti8PrcOuEy1o+dVVO6IVwmi5VHN2gMDAwRxYPpgDWw/mYL/anlDClvmcIVcYAuAkj0IwZM36uhet+e2ONVU5JivX0UJJVVVNNaciy+WEEgCI4FjxLag6KBOynE8re5cjF52KHTCOXZWqvR4c3xKj8Ijeqe0McCe0LLdNgmglparcT4o0/3i0jrjnA3mnkY93+t7ISkFZBK2n1WqxWEip5Ek50Z4POykPIX5SXk01RYw11RQx1lRzyF5NsUP26L6bwpoKVoiBPI9dZBUuaAV07x+SRdF6L4saD+mEgCqfRrlj71WD1UGpLKt3Tnx7fZ3f1O01ASp2qAfxRWSxGNnfxfVicVNNtVd9Yd5pztGKEU2tm9Ns8xDwt/758rVvx7/VmG2YvUx7js1U+Vv2ak6P+3x80OrK2nC0khYtIH8LmIec8rdMVY/9B2ZPd3J4KsnyQCvMNFlFzvYq34NaVnHP0HJQzvnk8IC/9InzTqFT6WNVVmtD5ZoE2YN4q3U11K6Txvaq+bKK3DXSbCg9YuKt0LHF41vqSfGD807FN3uG3ulfymBHC90ub5es3a6aoPwjIsopaP0GX54yGBOhKVpQ4u+B0RpRiwFFmg21GFB1kPVLZGgZc1XNaKVkI1xBqzfS7FaLQetXDnL5jS8DzblOAxmtMrVd9IPrxzOwGubh+fn7m8ZuVuWUVxQNq+Z0rCFzveuNvjkSh6owKuTqlowymNBiHoTpr6ztpq0hOxfvFEzqSqlyZrSILDta68uMy0eHQas4TTWn8iUOrKu2fYkgWhmN85jR6v0SX/zqqnu/RO+LLL0Z3FjBzHASlAlKExSY/JodrWUxab8CgeuhPAh9rxr2IEIQrdvd/v7RmNNr9CBE+5ONOQ/ijH35av5Zt5ub62/rYPFDa41/cjWnBS1mMgqUu1cC9aL1WHRlnaia0/OMpCGr6pFofU1/RpJPxGayI64sDD4RG8JqtvL7csT5W4aIjT0aqEbNxp7tZspjcjvbrdOsHsQqQlOe7XZmvrxDpHmX1K2iJ3c1aBm80+evZZ4JWZfoyzugtaasJEuhktCqV5f07LOqYhh+VpqsKdGKeUbDwc477c+ecDzvdM1lNc5Ze94pe4HsLtQFUpWb9LxTxyvOgDvRjFe3me5E065Tg+56s56lu0QNa1NGIM7SbWSxhfl1MIVyhrN0+Sg87DnN9WQSdrJ0BYPjOc1Lcc4sQytTZTUj7rpVbsQ5zSUIhEDr1N6pQ9aIPrb0ak6OViQrd5m+vANadI/iv2fSLGjdHPc+n/HZbob7fKBM6AHZbqJRX76VFVWv8+vF9b3D3QWDs91CMdMSivWbUOynCSWmnVC8iFCMlyYxkjOkKoMYYIwhMshKhSw/7xR3lCPHJULKIaGcIktWzgmIQf6WX5auu781Pku3q9yB7lw5J+/0YcXP+169+aB1SacsuqP1ylIOyNrXfG6llDVyLLQMdxcc5G5O98qVVxbUJU+Z410kYhDYZE3hywPVnD3X2PTMicmEc2Jzn89d228zWnevr68f33/eCqDf9jlRrw6CMT7ZfT6u/hY/1fquZe2PpeaarF/inS5v6/bK0EK8NOIs0TrCva/WdSLpQbuB8bYmwJFUo/WLK1pRBy3TOnHkva9WVw7yM/tduVywlgpry9D1aZ1PczONrdZ/xiZZkMMN9AsGYrJqzgnmxP4zO+F2xDnxjPyt3BOtitxoXbtkv9M7zc1uO9hOcHM86bvfqT9Rj0ns+NcKAxRDbCLN6Ha3u7213nyutKQryxrXa2UNPvXnUDFjU3waqbIUBnqViHvEJkId5UyyIOWKLkMfEBTWyeJb5r2PGPav+V718PjWoP2IX1TNqaB1uff5XAxavtWc9vytI501khpkxbbKUXv+Vl8157T5H9pdb6ZcE0t1UO5xMst2u91k7uVE/aVLfUCAeae9uUV+eafWPCalhszvZBbSFqosa26R/30+l1TNSdpKVe4X+fI/AK0R1Zze9/lMXM0poeWUbzvBafws0zlNec4zp1JCZSYKYOhhTS2s8mOeaF0HoHLpdMrJrIH2Iux5p711Am7VQXru/sC80/v9/n6Ju7JiwF5DGeBwNacNiEB8sz/POy046z9f3qGdypfvrcWY9ku0VnP23yeloGWw16O/RLgWQ5i5sXWZY2tAm3/K17f0OHC6izFTqB0hdoKaoeMp11A+HgSD/9AeRE3VSw2WtIgViu1fk38q2MfiWbHj6EEEFiDOzjvV97qMp6RCFujX+fK6vTbODadAq7ea89irat1zMlYHgfb6wKvqc4vYDKsO8lRuqKz/Aat0rwUEk32iAAAAAElFTkSuQmCC';
 
+  class Bird{
+    constructor(){
+      this.width=30;
+      this.height=30;
+      this.x=500;
+      this.y=30;
+    }
+    draw(){
+      ctx.fillStyle='blue';
+      ctx.fillRect(this.x,this.y,this.width,this.height);
+    }
+  }
+  //장애물 width, height 랜덤값 리턴함수
   function getRandomInt(min,max){
     min=Math.ceil(min);
     max=Math.floor(max);
     return Math.floor(Math.random()*(max-min)+min);
+  }
+  
+  function frameAction(){
+    //requestAnimationFrame()
+    //브라우저의 repaint주기에 맞게 함수가 실행되어(모니터 주사율에 맞게 실행)
+    //프레임드랍이 일어나지 않음
+    //setTimeout()사용시 프레임드랍 발생(일정한 주기x)
+    animation=requestAnimationFrame(frameAction);
+    let bird=new Bird();
+    bird.draw();
+    bird.x--;
+
+    
+    //장애물 잔상 지우기
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    timer++;
+    //시간마다 장애물 생성&움직이기
+    if(timer%120==0){
+      let cactus=new Cactus();
+      cactusArr.push(cactus);
+    }
+
+    //foreach()-배열 순회
+    //v: value  i: index  a=array
+    
+    //splice()-배열의 요소삭제 or 교체 or 추가
+    //i: index  1: 삭제 
+    //요소삭제하지 않고 추가할 때 splice(index, 0, value)
+    //요소 교체할 때 splice(index, 1, value )
+    cactusArr.forEach((v,i,a)=>{
+      if(v.x<0){
+        a.splice(i,1);
+        score+=10;
+        document.getElementById('score').innerHTML=score;
+      }else if(collisionDetection(dino,v)==false){
+        a.splice(i,1);
+      }
+      // collisionDetection(dino,v)
+      v.x-=3;
+      v.draw();
+      
+      drawLine();
+      dino.draw();
+    })
+    // cactus.x--;
+    // dino.draw();
+    // cactus.draw();
+
+    //캐릭터 점프
+    if(jump==true){
+     
+      jumpTimer++;
+      dino.y-=2;
+      
+    }
+
+    //캐릭터 점프시간
+    if(jumpTimer>50){
+      jump=false;
+      jumpTimer=0;
+    }
+    //캐릭터 점프후 제자리로
+    if(jump==false){
+      if(dino.y<200){
+        dino.y+=2;
+      }
+    }
+  }
+
+  //바닥선 그리기
+  function drawLine(){
+    ctx.beginPath();  //새로운 경로
+    ctx.moveTo(0,250);  //지정된 좌표로 이동
+    ctx.lineTo(600,250);  //현재위치에서 좌표까지 선그리기
+    ctx.stroke(); //윤곽선을 이용하여 도형 그리기
+  }
+  // frameAction();
+
+  //스페이스바 이벤트리스너 등록
+  document.addEventListener('keydown',(e)=>{
+    if(e.code=='Space'){
+      if(gameStart==false){
+        gameStart=true;
+        frameAction();
+      }else{
+        jump=true;
+      }
+    }
+  })
+
+  //장애물 충돌 여부리턴
+  function collisionDetection(dino,cactus){
+    let xValue=cactus.x-(dino.x+dino.width);
+    let yValue=cactus.y-(dino.y+dino.height);
+    if(xValue<0 && yValue<0){
+      life--;
+      document.getElementById('life').innerHTML=life;
+      if(life==0){
+        alert('게임오버');
+        gameStart=false;
+        location.reload();
+      }
+      return false;
+      // cancelAnimationFrame(animation);
+      // ctx.clearRect(0,0,canvas.width,canvas.height);
+    }else{
+      return true;
+    }
   }
 </script>
 </html>
