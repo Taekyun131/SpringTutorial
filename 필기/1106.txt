@@ -1,0 +1,54 @@
+웹개발
+Spring 
+HomeController 실행시 
+http://localhost:8080/hom/WEB-INF/classes/www/silver/hom/HomeController.java
+      url>>프로토콜://서버주소  포트넘버   context path  requestvalue 로 구성
+				     ㄴ해당 프로젝트 연결
+
+hom 다음 "/": Request Mapping 
+hom: context path
+
+server.xml source에서 확인
+<Context docBase="www" path="/hom"
+
+//DNS (Domain Name System)
+-ip(실제 주소)와 domain(주소의 이름) 매칭시켜주는 역할
+ping 연결가능여부를 확인	>>명령 프롬프트창에서 ping "주소" ex)ping www.google.com
+
+컨텍스트 패스(Context Path)
+웹 어플리케이션 서버(Web Application Server) = 
+	Tomcat에서 웹상의 어플리케이션들을 구분하기 위한 Path
+
+Request Mapping
+client request시 controller에서 어떠한 방식으로 처리할 지 정의
+특정 메서드와 매핑  (주로 value(요청받을 url)와 method(GET, POST, PUT, DELETE 등))
+
+HomeController
+client가 접속한 URL에 따라 실행되는 메서드를 정의해 client의 요청을 처리
+
+
+**Spring 인코딩
+1. preferences>general>workspace
+검색: css, jsp 
+인코딩 utf-8로 변경
+2. web.xml </web-app>위에 
+	<filter> 
+		<filter-name>encoding-filter</filter-name> 
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+		<init-param> 
+			<param-name>encoding</param-name> 
+			<param-value>UTF-8</param-value> 
+		</init-param> 
+	</filter> 
+	<filter-mapping> 
+		<filter-name>encoding-filter</filter-name> 
+		<url-pattern>/*</url-pattern> 
+	</filter-mapping>
+붙여넣기
+
+3. home.jsp 문서 맨 위에
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+추가
+
+

@@ -1,0 +1,69 @@
+실습과제
+www2 프로젝트에서
+
+서비스명: 메인화면 요청
+url: /
+데이터베이스 작업 없음
+응답뷰: home
+
+조건: 한글이 깨지지않게 설정, 그림파일 보이게 설정
+
+정리질문
+1. 클라이언트가 request를 할 때 공부해야하는 것 3가지
+  -url, method, parameter
+
+2. url의 구성하는 각 부분을 설명하시오
+  -프로토콜: http 웹 브라우저 통신규약
+  -서버주소: 사용하는 컴퓨터의 ip주소
+  -포트넘버: 어떤 프로그램을 사용할 지 결정
+  -context path: WAS에서 어떤 프로젝트를 연결할지 결정  
+  -request value: 요청 값
+
+3. 스프링에서 @Controller의 의미
+  client의 request에 따라 실행되는 메서드를 정의
+
+4. 스프링에서 RequestMapping의 의미
+  client의 request를 어떤 방식으로 처리할지 정의
+  value에 따라 method와 return값 정의
+
+5. 스프링 컨트롤러에서 return 다음에 오는 문자열의 의미
+  client가 request하면 response할 view정의
+
+6. Maven Spring의 디렉토리 구조
+  자바소스위치: src/main/java
+  정적 컨텐츠 위치: resources
+  view 파일위치: views
+  설정파일 위치: spring, web.xml
+  maven 설정파일: pom.xml
+  Mybatis 설정파일위치: src/main/resources
+7. 이미지나 정적 컨텐츠의 위치 
+  resources폴더
+8. 스프링에서 한글을 설정하는 방법 3가지
+ 1) preferences에서 인코딩방식을 utf-8로 변경
+ 2) web.xml에서 입력
+<filter> 
+		<filter-name>encoding-filter</filter-name> 
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+		<init-param> 
+			<param-name>encoding</param-name> 
+			<param-value>UTF-8</param-value> 
+		</init-param> 
+	</filter> 
+	<filter-mapping> 
+		<filter-name>encoding-filter</filter-name> 
+		<url-pattern>/*</url-pattern> 
+	</filter-mapping>
+  3) 문서에서 입력
+    <%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+
+9. ContextPath의 의미
+
+10. 클라이언트에서 get방식으로 request를 발생하는 방법 2가지
+
+
+---추가하면 좋은 이론들
+DNS, IP, PORT
+REST API
+Web server와 WAS
+View Template
