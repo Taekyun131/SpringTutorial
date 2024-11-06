@@ -36,8 +36,10 @@ url: /
   설정파일 위치: spring, web.xml
   maven 설정파일: pom.xml
   Mybatis 설정파일위치: src/main/resources
+
 7. 이미지나 정적 컨텐츠의 위치 
   resources폴더
+
 8. 스프링에서 한글을 설정하는 방법 3가지
  1) preferences에서 인코딩방식을 utf-8로 변경
  2) web.xml에서 입력
