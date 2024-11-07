@@ -9,7 +9,7 @@
 <body>
 	오후일정: 5시 30분까지 숨도 쉬지말고 화장실도 가지말고 잠도 자면 안되고. 브롤하기
 	<a href="<%=request.getContextPath()%>/viewMessage?time=4&name=human">[지각자만보기]</a>
-	<form action="viewMessage" method="post">
+	<form action="viewMessage" method="get">
 		time: <input type="text" name="time">
  		name: <input type="text" name="name">
  		<input type="submit" value="전송">
