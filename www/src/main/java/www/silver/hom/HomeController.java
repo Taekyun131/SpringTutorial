@@ -10,11 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 /** aaa
  * Handles requests for the application home page.
  */
-@Controller		// Å¬·¡½ºÀÌ¸§À§¿¡ @Controller => ÄÁÆ®·Ñ·¯ ¿ªÈ°ÇÏ°Ôµû!
+@Controller		// Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ @Controller => ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ ï¿½ï¿½È°ï¿½Ï°Ôµï¿½!
+//@RestController
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -22,7 +26,7 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)	// @RequestMapping Å¬¶óÀÌ¾ğÆ®°¡ ¿äÃ» / ¿äÃ»ÇÑ ³»¿ëÀº  "/"
+	@RequestMapping(value = "/", method = RequestMethod.GET)	// @RequestMapping Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½Ã» / ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  "/"
 	public String home(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
@@ -33,8 +37,8 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
-		return "home";	// "home" ÀÌ ÀÀ´äÇÏ´Â ÆÄÀÏ¸í  (µÚ¿¡ .jsp »ı·«µÊ) ¹®ÀÚ¿­À» ÆÄÀÏ¸íÀ¸·Î ÀÎ½Ä~
-		// src/main/WEB-INF/views  °æ·Î¿¡ home.jsp
+		return "home";	// "home" ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½  (ï¿½Ú¿ï¿½ .jsp ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½~
+		// src/main/WEB-INF/views  ï¿½ï¿½Î¿ï¿½ home.jsp
 	}
 	
 	//https://bubblecastle.tistory.com/9
@@ -44,8 +48,28 @@ public class HomeController {
 		return "timeline"; 
 	}
 	
+	@RequestMapping(value = "/viewMessage", method = RequestMethod.POST)
+	public String viewMessage(@RequestParam("time") String t,
+			@RequestParam("name") String n,Model m) {
+		//ë””ë²„ê¹…-í™•ì¸ìš©
+//		System.out.print(t+"/"+n);
+//		ModelAndView mm=new ModelAndView();
+		m.addAttribute("ë³€ìˆ˜ëª…","ê°’");
+		m.addAttribute("time",t);
+		m.addAttribute("name",n);
+		m.addAttribute("age",1);
+		return "viewMsg"; 
+	}
 	@RequestMapping(value = "/viewMessage", method = RequestMethod.GET)
-	public String viewMessage() {
+	public String viewMessage1(@RequestParam("time") String t,
+			@RequestParam("name") String n,Model m) {
+		//ë””ë²„ê¹…-í™•ì¸ìš©
+//		System.out.print(t+"/"+n);
+//		ModelAndView mm=new ModelAndView();
+		m.addAttribute("ë³€ìˆ˜ëª…","ê°’");
+		m.addAttribute("time",t);
+		m.addAttribute("name",n);
+		m.addAttribute("age",1);
 		return "viewMsg"; 
 	}
 }

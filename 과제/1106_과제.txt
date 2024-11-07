@@ -16,7 +16,7 @@ url: /
   -프로토콜: http 웹 브라우저 통신규약
   -서버주소: 사용하는 컴퓨터의 ip주소
   -포트넘버: 어떤 프로그램을 사용할 지 결정
-  -context path: WAS에서 어떤 프로젝트를 연결할지 결정  
+  -context path: WAS에서 웹 어플리케이션을 구분해주는 path  
   -request value: 요청 값
 
 3. 스프링에서 @Controller의 의미
@@ -43,7 +43,7 @@ url: /
 8. 스프링에서 한글을 설정하는 방법 3가지
  1) preferences에서 인코딩방식을 utf-8로 변경
  2) web.xml에서 입력
-<filter> 
+	<filter> 
 		<filter-name>encoding-filter</filter-name> 
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
 		<init-param> 
@@ -55,14 +55,15 @@ url: /
 		<filter-name>encoding-filter</filter-name> 
 		<url-pattern>/*</url-pattern> 
 	</filter-mapping>
-  3) 문서에서 입력
+  3) view문서에서 입력
     <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 
 9. ContextPath의 의미
+   WAS에서 웹 어플리케이션을 구분해주는 path(프로젝트 연결)
 
 10. 클라이언트에서 get방식으로 request를 발생하는 방법 2가지
-
+   
 
 ---추가하면 좋은 이론들
 DNS, IP, PORT

@@ -1,0 +1,55 @@
+프로젝트 관리하는 방식
+maven 구조(현재 사용방식), gradle 구조
+
+정적 컨텐츠 위치: webapp 바로 하위 디렉토리
+		대부분 resources 하위 디렉토리에 보관
+
+--1106 질문답안
+1. Method: get, post
+   URL: 요청
+   Parameter: 서버에게 전송할 데이터
+
+2. protocol: http(웹 프로토콜)
+   host: 서버주소(아이피 또는 도메인)
+   port: 80
+   contextpath: 프로젝트 단위(WAS)
+   value, query: 스프이에게 요청하는 서비스
+
+3. 1) 요청을 받아준다. 이 때 파라미터가 있다면 받아준다.
+   2) 비지니스 로직을 수행한다. 비지니스 로직이란 데이터베이스 작업을 의미
+      즉, 비지니스 로직이 필요하면 서비스 레이어에 작업을 지시
+   3) 응답을 해준다
+      동기방식에서는 view를 지정한다(return 타입이 String이면 해당 값에 해당하는 view리턴)
+      비동기 방식에서는 문자열 또는 숫자, 객체로 전송한다
+
+4. value와 메서드를 지정하여 클라이언트의 요청을 처리해주는 어노테이션
+   어노테이션이란 @로 시작하며 컴파일러에게 특수목적이 있음을 알려준다
+   스프링에서는 어노테이션으로 스프링에서 제공하는 기능을 부여한다
+   run on server>>Maven에 있는 파일 컴파일하면서 어노테이션에 따라 기능부여
+
+5. view 이름
+
+6. pom.xml<버전설정, 라이브러리관리 등...
+
+7. webapp하위 디렉토리(주로 webapp/resources에서 관리)
+
+8. IDE 환경설정, Spring Legacy의 환경설정(web.xml), view file(jsp)
+
+9. 웹 어플리케이션을 구분하기 위한 path
+   WAS는 컨텍스트패스와 처리하기위한 웹 어플리케이션을 매핑하는 정보를 가지고 있다.
+   tomcat인 경우는 server.xml파일에 설정됨
+
+10. 브라우저 창에 주소를 입력하여 요청하면 get방식
+    a 태그의 주소를 이용하면 get방식
+--------------------------------------------------------------
+@controller>>동기방식 컨트롤러
+@restcontroller>>비동기 방식 컨트롤러
+
+controller에서 view에게 값을 넘겨줄 때-model 객체 사용
+model.addAttribute("변수명", "값");
+modelAndView>>model의 역할+view의 역할
+
+
+controller일 때 return타입 String>>view의 이름으로 인식
+restcontroller일 때 return타입 String>>문자열로 인식
+pom.xml>>springframework-4.3.22 변경해야함
