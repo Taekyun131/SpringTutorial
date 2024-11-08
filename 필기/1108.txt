@@ -25,6 +25,14 @@ pom.xml설정을 안하면 인식x
  해당 패키지를 스캔해서 annotaion에 따라 객체 생성
  annotaion이 없으면 컴파일러가 인식x
 
+
+root-context.xml에서
+db작업 관련 bean 설정
+
+mapper폴더
+Mapper.xml생성
+쿼리문 작성
+
 property-객체의 setter
 constructor-생성자
 ref-의존
