@@ -48,4 +48,13 @@ public class WordDAO {
 		
 		return null;
 	}
+	
+	public void delWord(String word) {
+		for(int i=0;i<wordList.size();i++) {
+			if(wordList.get(i).getTitle().equals(word)) {
+				wordList.remove(i);
+				break;
+			}
+		}
+	}
 }

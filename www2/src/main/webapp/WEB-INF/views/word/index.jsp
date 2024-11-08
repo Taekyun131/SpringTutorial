@@ -20,9 +20,17 @@
 	<form action="search" method="get">
 		<input type="text" name="word" placeholder="검색어를 입력하세요">
 		<input type="submit" value="검색"><br><br>
-		
-		
+	</form>
+	<br><br>
+	<h3>단어삭제</h3>
+	<form action="delete" method="get">
+		<input type="text" name="delWord" placeholder="삭제할 단어를 입력하세요">
+		<input type="submit" value="삭제">
+	</form>
+	<br><br>
 	
+	<form>
+		
 	</form>
 </body>
 </html>

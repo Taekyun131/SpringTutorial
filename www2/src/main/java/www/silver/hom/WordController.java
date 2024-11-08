@@ -65,7 +65,13 @@ public class WordController {
 		
 	}
 	
-	
-	
-	
+	@RequestMapping(value="delete", method=RequestMethod.GET)
+	public String delWord(@RequestParam("delWord") String delWord) {
+		wdao.delWord(delWord);
+		ArrayList<Word> wordList=wdao.showList();
+		for(Word temp:wordList) {
+			System.out.println(temp.getTitle());
+		}
+		return "word/index";
+	}
 }

@@ -1,0 +1,95 @@
+서블릿: 서버에서 웹페이지 등을 동적으로 생성하거나 데이터 처리를 수행하기 위해 
+	자바로 작성된 프로그램
+	Java코드 안에 html 태그 삽입
+JSP: html 내부에 Java코드를 삽입하는 형식, 서블릿 기반의 서버 스크립트 기술...
+--------------------------------------------------------
+실습내용: Mybatis 퍼시스턴스 프레임워크를 사용하여
+	Spring 프레임워크와 연동	
+	퍼시스턴스 프레임워크는 영속적인 의미를 포함(데이터베이스 작업)
+	즉, 데이터베이스 작업을 원활히 할 수 있는 프레임워크
+
+프로젝트마다 Mybtis나 JPA 등 사용하는기술 상이
+따라서, 퍼시스턴스 프레임워크의 성격을 이해해야 한다
+
+--환경설정
+
+pom.xml 에서 환경설정...<dependency>에서 설정>>ojdbc8 자동 빌드
+	(자바로 환경설정도 가능)
+
+servlet-context.xml에서...
+beans는 객체라고 생각
+class는 자료형
+pom.xml설정을 안하면 인식x
+
+<context:component-scan base-package="www.silver.hom" />
+ 해당 패키지를 스캔해서 annotaion에 따라 객체 생성
+ annotaion이 없으면 컴파일러가 인식x
+
+property-객체의 setter
+constructor-생성자
+ref-의존
+
+생성자로 주입-필수적인 의미
+setter 주입-선택적
+
+
+
+--개발
+
+client 
+hom.jsp에서 <form>으로 묶고 action, method 지정, <input>에 name 설정(매핑위한 작업)
+
+server
+vo생성(vo-변수명, input-name, db-컬럼명 일치시켜야 spring이 자동매핑)
+
+controller
+modelAttribute를 통해 vo로 데이터 받는다
+비지니스 로직이 필요하므로 서비스단에게 요청
+@Service를 통해 객체를 컨테이너에 등록
+서비스 인터페이스타입의 변수를 생성해 @inject를 통해 주소주입
+(컨테이너에 등록되어있어야 주입가능)
+
+service
+서비스단에서는 결합도를 낮추기 위해 인터페이스로 정의
+인터페이스를 구현받아 클래스 생성해 메서드 구현
+db작업을 위해서 dao에게 요청
+dao 인터페이스타입의 변수(다형성 사용)를 생성해 @inject를 통해 주소 주입
+spring에서는 인터페이스 한개당 클래스 한개만 구현가능>>spring에서 주소주입가능
+
+dao
+db작업을 위해 sqlSession 객체 필요
+변수생성 후 @Inject를 통해 주소주입
+sqlSession.insert( )
+
+mapper
+namespace, parameterType,
+
+
+
+**디버깅 순서
+1. 클라이언트>컨트롤러 전송
+2. 컨트롤러> 서비스
+3. 서비스>DAO
+4. DAO>sqlsession매핑(mapper포함)
+
+
+
+
+**정리
+1. Mybatis-퍼시턴스 프레임워크
+  1) 의존성 설정(dependency 추가-라이브러리 빌드)	
+	>>pom.xml(스프링버전확인>4.3.22, java버전, dependency종류)
+  2) 필요한 Bean(객체)설정-root-context, servlet-context
+   	dataSource, factory, template // 추가공부: 콘솔에 쿼리문 출력하는 Bean
+	https://soobindeveloper8.tistory.com/1022참조
+  3) 작업순서: client>컨트롤러>서비스>dao
+
+2. 객체가 컨테이너에 등록하려면
+   1) xml에 bean설정
+   2) 어노테이션 필요-controller, service... **component(내가 만든 객체 등록시)**
+   
+Inject vs autowired 주소주입받는 방식 차이 추가공부
+https://codingnojam.tistory.com/13 참조
+
+
+

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>검색어가 없습니다</h1>
+	<h1>단어가 없습니다</h1>
 	<a href="<%=request.getContextPath()%>/word">돌아가기</a>
 </body>
 </html>
