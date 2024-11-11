@@ -1,0 +1,33 @@
+1108_실습과정정리
+
+환경설정
+pom.xml 설정>>라이브러리 다운, 스프링 버전 4.3.22변경
+root-context 설정>>Bean 설정(data Source, sqlSessionFactory, sqlSessionTemplate),
+		 스캔할 패키지 설정
+servlet-context 설정>>스캔할 패키지 설정
+
+개발과정
+파라미터로 vo 사용>>클래스 생성
+서비스단, dao단, 컨트롤러 생성(서비스단과 dao단은 결합도를 낮추기 위해 인터페이스사용)
+컨트롤러>>파라미터로 vo를 받기 위해 ModelAttribute 어노테이션 사용
+	비지니스 로직을 서비스단에게 요청
+서비스>>객체를 생성하기 위해 Service 어노테이션 사용
+	컨테이넌에 등록된 객체의 주소를 주입받기 위해 Inject 어노테이션 사용
+	dao에게 작업요청
+dao>>객체를 생성하기 위해 Repository 어노테이션 사용
+	컨테이너에 등록된 객체의 주소를 주입받기 위해 Inject 어노테이션 사용
+	splSessionTemplate객체의 insert 메서드 호출
+mapper>>쿼리문 작성
+
+오라클>>테이블 생성(vo의 변수명, input의 name과 동일한 컬럼 생성)
+---------------------------------------------------------------------------------------------
+실습내용
+1. 게시판 버튼
+2. +버튼
+3. 작성버튼
+
+클라이언트
+form 태그의 action, method 정의
+
+개발
+컨트롤러 request 매핑>view정의>service, dao, vo 클래스 정의>mapper와 매핑>table 정의

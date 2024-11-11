@@ -28,7 +28,8 @@ client가 접속한 URL에 따라 실행되는 메서드를 정의해 client의 
 
 
 **Spring 인코딩
-1. preferences>general>workspace
+1. IDE 인코딩방식
+preferences>general>workspace
 검색: css, jsp 
 인코딩 utf-8로 변경
 2. web.xml </web-app>위에 
