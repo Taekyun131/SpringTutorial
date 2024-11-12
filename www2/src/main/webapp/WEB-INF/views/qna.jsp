@@ -2,6 +2,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -228,21 +229,25 @@ footer{
   </aside>
   <section>
     <table id="main">
-      <tr>
-        <td><a href=""><i class="fa-brands fa-html5"></i>HTML</a></td>
-        <td><a href=""><i class="fa-brands fa-js"></i>JS</a></td>
-      </tr>
-      <tr>
-        <td><a href=""><i class="fa-brands fa-java"></i>JAVA</a></td>
-        <td><a href=""><i class="fa-solid fa-database"></i>DB</a></td>
-      </tr>
-      <tr>
-        <td><a href=""><i class="fa-solid fa-leaf"></i>SPRING</a></td>
-      </tr>
+	   	<thead>
+	   		<tr>
+	   			<th>글 번호</th>
+	   			<th>과목</th>
+	   			<th>글 제목</th>
+	   			<th>날짜</th>
+	   			<th>삭제</th>
+	   			<th>답변하기</th>
+	   		</tr>
+	   	</thead>
+	   	<tbody>
+	   		
+	   	</tbody>
+	   	
+      	
     </table>
     <table id="button">
       <tr>
-        <td><button>글 작성</button></td>
+        <td><button onclick="location.href='write'" >글 작성</button></td>
         <td><button>글 삭제</button></td>
       </tr>
     </table>

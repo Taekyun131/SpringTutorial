@@ -1,5 +1,7 @@
 package www.silver.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,6 +18,15 @@ public class BoardDAOImpl implements IF_BoardDAO{
 	public void insertBoard(BoardVO boardvo) throws Exception {
 		//sqlsession을 통해서 mapper와 매핑해야 하기에 정보를 넘겨준다.
 		sqlsession.insert( mapperQuery+".inin",boardvo);
+	}
+	@Override
+	public List<BoardVO> selectAll() throws Exception {
+		return sqlsession.selectList(mapperQuery+".selectall");
+		
+	}
+	@Override
+	public void deleteBoard(String delno) throws Exception {
+		sqlsession.delete(mapperQuery+".delone",delno);
 	}
 	
 }

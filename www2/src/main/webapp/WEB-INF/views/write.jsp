@@ -2,6 +2,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,6 +95,10 @@
     height: 750px;
     border: 1px solid;
   }
+  
+    section #content{
+ 	font-size: 30px
+  }
   #photo img{
     width: 200px;
     height: 200px;
@@ -125,15 +130,11 @@
     box-sizing: border-box;
   }
   section #main td{
-    width: 500px ;
-    
     border: 1px solid;
     box-sizing: border-box;
     text-align: center;
   }
-  section #main td:hover{
-    background-color: darksalmon;
-  }
+ 
   section #main a{
     color: #00000034;
     text-decoration: none;
@@ -227,22 +228,46 @@ footer{
     </form>
   </aside>
   <section>
-    <table id="main">
-      <tr>
-        <td><a href=""><i class="fa-brands fa-html5"></i>HTML</a></td>
-        <td><a href=""><i class="fa-brands fa-js"></i>JS</a></td>
-      </tr>
-      <tr>
-        <td><a href=""><i class="fa-brands fa-java"></i>JAVA</a></td>
-        <td><a href=""><i class="fa-solid fa-database"></i>DB</a></td>
-      </tr>
-      <tr>
-        <td><a href=""><i class="fa-solid fa-leaf"></i>SPRING</a></td>
-      </tr>
-    </table>
+  	<form action="save" method="post">
+	    <table id="main">
+		   	<tr>
+		   		<td><label for="subject">과목선택</label></td>
+		   		<td>
+		   			<select id=subject name="sub">
+		   				<option value="html">html</option>
+		   				<option value="js">js</option>
+		   				<option value="java">java</option>
+		   				<option value="oracle">oracle</option>
+		   				<option value="spring">spring</option>
+		   			</select>
+	   			</td>
+	   			<td>
+	   				<label for="title">제목</label>
+	   			</td>
+	   			<td>
+	   				<input id="title" type="text"></input>
+	   			</td>
+		   	</tr>
+		   	<tr>
+		   		<td>
+		   			<label>내용</label>
+		   		</td>
+		   	</tr>
+		   	<tr>
+		   		<td colspan=4>
+		   			<textarea id=content rows="5" cols="30"></textarea>
+		   		</td>
+		   	</tr>
+		   	<tr>
+		   		<td>
+		   			<button type="submit"  >저장</button>
+		   		</td>
+		   	</tr>
+	    </table>
+  	</form>
     <table id="button">
       <tr>
-        <td><button>글 작성</button></td>
+        <td><button href="write">글 작성</button></td>
         <td><button>글 삭제</button></td>
       </tr>
     </table>

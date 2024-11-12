@@ -1,0 +1,53 @@
+QnA
+1) 
+input type=checkbox  value="축구">> 체크 시 "축구" 전송
+value 지정 안할 시 >>on
+
+input type=checkbox  value="축구" name=hobby
+input type=checkbox  value="농구" name=hobby
+>>둘 다 체크 시 데이터를 배열로 전송
+
+
+2)
+**spring layer
+
+-컨트롤러	: 클라이언트가 무엇을 원하는가...
+-서비스: 서비스 처리
+-dao(repository): crud
+
+레이어를 나누면 필요에 따라 어떤 메서드를 호출할 것인지 선택가능
+메서드의 재사용성을 높인다, 유지보수 용이
+
+
+---------------------------------------------------------------------------
+게시판 누르면 db에 저장된 글 보여지는 기능
+
+*클라이언트
+
+-para:x
+-method: get
+-value: board
+
+*서버
+
+-컨트롤러
+
+-서비스
+ public ArrayList<boardvo> boardList()
+-리포지토리
+ public ArrayList<boardvo> selectAll()
+-mapper
+ select * from kboard
+
+컨트롤러에 리턴받은 arraylist는 Model객체를 통해 view에게 넘겨준다.
+반복문 사용
+
+jsp파일에 for문을 써도 가능>>불편(import수동, java문법)
+ㄴjstl문법 사용
+
+
+서버사이드랜더링-서버가 처리
+
+개발과정
+클라이언트/컨트롤러/서비스/리포지토리/mapper db 순으로
+다시 역순으로 뷰까지
