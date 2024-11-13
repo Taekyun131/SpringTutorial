@@ -18,10 +18,10 @@ public class BoardServiceImpl implements IF_BoardService {
 	public void addBoard(BoardVO boardvo) throws Exception {
 		if(boardvo.getViewmember()!=null) {
 			if(boardvo.getViewmember().equals("1")) {
-				boardvo.setViewmember("공개");
+				boardvo.setViewmember("비공개");
 			}
 		}else {
-			boardvo.setViewmember("비공개");
+			boardvo.setViewmember("공개");
 		}
 		boarddao.insertBoard(boardvo);
 		//dao>>mapper>>DB insert
@@ -35,11 +35,26 @@ public class BoardServiceImpl implements IF_BoardService {
 			b.setIndate(date.substring(0,10));
 		}//서버사이드랜더링>>서버에게 부담을 준다.
 		//뷰에서 substring하는 방법찾기...
-		return boarddao.selectAll();
+		return list;
 	}
 	@Override
 	public void deleteBoard(String delno) throws Exception {
 		boarddao.deleteBoard(delno);
+	}
+	@Override
+	public BoardVO modBoard(String modno) throws Exception {
+		return boarddao.selectOne(modno);
+	}
+	@Override
+	public void modBoard(BoardVO bvo) throws Exception {
+		if(bvo.getViewmember()!=null) {
+			if(bvo.getViewmember().equals("1")) {
+				bvo.setViewmember("비공개");
+			}
+		}else {
+			bvo.setViewmember("공개");
+		}
+		boarddao.updateBoard(bvo);
 	}
 	
 	

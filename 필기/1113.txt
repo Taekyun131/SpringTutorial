@@ -1,0 +1,53 @@
+**글 수정
+
+1. 수정할 글 가져오기
+2. 수정글 update
+
+클라이언트
+value: mod
+method: get
+parameter: title
+
+
+컨트롤러
+@GetMapping
+@RequestParam
+
+model>modform.jsp
+
+서비스
+public BoardVO modBoard( String title)
+
+Repository
+public BoardVO selectOne(String title)
+
+Mapper
+select * from kboard where title=#{title}
+
+--------------------------------------------------------------------
+** 수정 글 update
+클라이언트
+value: mod
+method: post
+parameter: username, type, title, content, pass, viewmember
+
+
+컨트롤러
+@PosMapping
+@modelAttribute
+
+model>modform.jsp
+
+서비스
+public void modBoard( BoardVO)	
+//메서드 오버로드-리턴타입이나 매개변수타입이 다를 때
+
+Repository
+public void updateBoard(BoardVO)
+
+Mapper
+update kboard ~~
+-------------------------------------------------------
+**tip
+1. dao에서 매핑 시 sqlsession 파라미터 여러개>>hashmap 사용
+2. jstl 조건문-<c:if></c:if>

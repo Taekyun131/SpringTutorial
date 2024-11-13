@@ -4,9 +4,11 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import www.silver.service.IF_qnaService;
+import www.silver.vo.questionVO;
 
 @Controller	
 public class qnaController {
@@ -23,8 +25,9 @@ public class qnaController {
 		return "write";
 	}
 	
-	@PostMapping(value="save")
-	public String save( ) {
+	@GetMapping(value="save")
+	public String save(@ModelAttribute questionVO qvo) {
+		System.out.println(qvo.toString());
 		return "redirect:qna";
 	}
 }

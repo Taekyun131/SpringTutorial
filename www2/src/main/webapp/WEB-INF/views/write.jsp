@@ -228,12 +228,12 @@ footer{
     </form>
   </aside>
   <section>
-  	<form action="save" method="post">
+  	<form action="save" method="get">
 	    <table id="main">
 		   	<tr>
-		   		<td><label for="subject">과목선택</label></td>
+		   		<td><label >과목선택</label></td>
 		   		<td>
-		   			<select id=subject name="sub">
+		   			<select name="subject">
 		   				<option value="html">html</option>
 		   				<option value="js">js</option>
 		   				<option value="java">java</option>
@@ -245,7 +245,7 @@ footer{
 	   				<label for="title">제목</label>
 	   			</td>
 	   			<td>
-	   				<input id="title" type="text"></input>
+	   				<input id="title" type="text" name=title></input>
 	   			</td>
 		   	</tr>
 		   	<tr>
@@ -255,12 +255,12 @@ footer{
 		   	</tr>
 		   	<tr>
 		   		<td colspan=4>
-		   			<textarea id=content rows="5" cols="30"></textarea>
+		   			<textarea id=content rows="5" cols="30" name="content"></textarea>
 		   		</td>
 		   	</tr>
 		   	<tr>
 		   		<td>
-		   			<button type="submit"  >저장</button>
+		   			<input type="submit" value="저장"  ></button>
 		   		</td>
 		   	</tr>
 	    </table>

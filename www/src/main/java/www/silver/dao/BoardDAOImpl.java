@@ -28,5 +28,14 @@ public class BoardDAOImpl implements IF_BoardDAO{
 	public void deleteBoard(String delno) throws Exception {
 		sqlsession.delete(mapperQuery+".delone",delno);
 	}
+	@Override
+	public BoardVO selectOne(String title) throws Exception {
+		return sqlsession.selectOne(mapperQuery+".selectTitle", title);
+	}
+	@Override
+	public void updateBoard(BoardVO bvo) throws Exception {
+		sqlsession.update(mapperQuery+".update", bvo);
+		
+	}
 	
 }

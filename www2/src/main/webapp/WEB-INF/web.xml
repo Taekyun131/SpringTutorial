@@ -41,6 +41,6 @@
 		<filter-name>encoding-filter</filter-name> 
 		<url-pattern>/*</url-pattern> 
 	</filter-mapping>
-출처: https://life-with-coding.tistory.com/385 [코딩젤리:티스토리]
+
 
 </web-app>
