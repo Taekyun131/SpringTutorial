@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import www.silver.dao.IF_BoardDAO;
 import www.silver.vo.BoardVO;
+import www.silver.vo.PageVO;
 
 @Service
 public class BoardServiceImpl implements IF_BoardService {
@@ -27,9 +28,9 @@ public class BoardServiceImpl implements IF_BoardService {
 		//dao>>mapper>>DB insert
 	}
 	@Override
-	public List<BoardVO> boardList() throws Exception {
+	public List<BoardVO> boardList(PageVO pagevo) throws Exception {
 		//처리하다가 DB작업이 필요..
-		List<BoardVO> list=boarddao.selectAll();
+		List<BoardVO> list=boarddao.selectAll(pagevo);
 		for(BoardVO b:list) {
 			String date=b.getIndate();
 			b.setIndate(date.substring(0,10));
@@ -55,6 +56,10 @@ public class BoardServiceImpl implements IF_BoardService {
 			bvo.setViewmember("공개");
 		}
 		boarddao.updateBoard(bvo);
+	}
+	@Override
+	public int totalCountBoard() throws Exception {
+		return boarddao.cntBoard();
 	}
 	
 	

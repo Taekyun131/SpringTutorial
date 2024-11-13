@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import www.silver.service.IF_BoardService;
 import www.silver.vo.BoardVO;
+import www.silver.vo.PageVO;
 
 
 @Controller
@@ -22,11 +23,25 @@ public class BoardController {
 	IF_BoardService boardservice;
 	
 	@GetMapping(value = "board")
-	public String board(Model model) throws Exception{	
+	public String board(Model model, @ModelAttribute PageVO pagevo) throws Exception{	
 		//Controller>service>dao>mapper
+		if(pagevo.getPage()==null) {
+			pagevo.setPage(1);
+		}
+		//3가지 정보만 있으면 페이지 계산이 가능
+		//1. 현재 페이지 2. 페이지당 게시물 수 3. 전체 페이지 수
+		pagevo.setTotalCount(boardservice.totalCountBoard());
+		
+		//확인용
+//		System.out.println(pagevo.getStartNo()+"시작 글 번호");
+//		System.out.println(pagevo.getEndNo()+"시작 글 번호");
+//		System.out.println(pagevo.getStartPage()+"그룹 시작 번호");
+//		System.out.println(pagevo.getEndPage()+"그룹 끝 번호");
+		
+		
 		//전체 게시글을 가져오는 작업필요
 		//서비스layer에게 전체글 서비스를 요청하고 결과를 리턴
-		List<BoardVO> list=boardservice.boardList();
+		List<BoardVO> list=boardservice.boardList(pagevo);
 		//리턴받은 list변수의 값을 모델객체로 뷰에게 전송하는 코드
 		model.addAttribute("list", list);
 		//단위테스트

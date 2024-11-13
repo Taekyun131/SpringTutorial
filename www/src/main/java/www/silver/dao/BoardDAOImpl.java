@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import www.silver.vo.BoardVO;
+import www.silver.vo.PageVO;
 @Repository
 public class BoardDAOImpl implements IF_BoardDAO{
 
@@ -20,8 +21,8 @@ public class BoardDAOImpl implements IF_BoardDAO{
 		sqlsession.insert( mapperQuery+".inin",boardvo);
 	}
 	@Override
-	public List<BoardVO> selectAll() throws Exception {
-		return sqlsession.selectList(mapperQuery+".selectall");
+	public List<BoardVO> selectAll(PageVO pagevo) throws Exception {
+		return sqlsession.selectList(mapperQuery+".selectall", pagevo);
 		
 	}
 	@Override
@@ -36,6 +37,10 @@ public class BoardDAOImpl implements IF_BoardDAO{
 	public void updateBoard(BoardVO bvo) throws Exception {
 		sqlsession.update(mapperQuery+".update", bvo);
 		
+	}
+	@Override
+	public int cntBoard() throws Exception {
+		return sqlsession.selectOne(mapperQuery+".allcnt");
 	}
 	
 }
