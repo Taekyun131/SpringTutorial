@@ -435,7 +435,7 @@
         </div>
       </div>
 
-      <form class="row g-3" action="bwrdo" method="post">
+      <form class="row g-3" action="bwrdo" method="post" encType="multipart/form-data">
         <div class="col-md-4">
           <label for="inputState" class="form-label" >놀이터 선택</label>
           <select id="inputState" class="form-select" name="type">
@@ -463,8 +463,8 @@
           <label for="floatingTextarea2">Comments</label>
         </div>
         <div class="mb-3">
-          <input class="form-control" type="file" id="formFile">
-          <input class="form-control" type="file" id="formFile">
+          <input class="form-control" type="file" id="formFile" name="file">
+          <input class="form-control" type="file" id="formFile" name="file">
         </div>
 
         <div class="col-12">
@@ -482,7 +482,7 @@
     </div>
 
   </div>
-  </div>
+  
   <div id="asidelogin">
     <div id="loginbox">
       <div id="loginup">
@@ -575,7 +575,7 @@
       </div>
     </div>
   </div>
-  <div>
+  
     <!-- Modal -->
     <!-- Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -603,7 +603,7 @@
           </div>
         </div>
       </div>
-      <div>
+      </div>
         <!-- Modal -->
 </body>
 

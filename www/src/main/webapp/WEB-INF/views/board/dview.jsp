@@ -427,73 +427,59 @@
       </div>
     </div>
     <div id="mainsection_01">
-
+      <br>
       <div>
-        <div>
-          <div class="card text-center">
-            <div class="card-body">
-
-              <h5 class="card-title">게시판</h5>
-            </div>
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title">자세히 보기</h5>
           </div>
         </div>
       </div>
-      <div id="article_table">
-        <table class="table">
-          <thead class="table-dark">
-            <tr>
-              <th scope="col" width=15%>type</th>
-              <th scope="col" width=30%>title</th>
-              <th scope="col" width=15%>비밀글여부</th>
-              <th scope="col" width=20%>날짜</th>
-              <th scope="col" width=20%>수정/삭제</th>
-            </tr>
-          </thead>
-          <tbody>
-          <!-- vo한개가 tr한줄 -->
-	      	<c:forEach items="${list }" var="boardvo">
-	            <tr>
-	              <th scope="row">${boardvo.type}</th>
-	              <td><a href="view?no=${boardvo.num}">${boardvo.title}</a></td>
-	              <td>${boardvo.viewmember}</td>
-	              <td>${boardvo.indate}</td>
-	              <td><a href="mod?modno=${boardvo.num }">수정</a>/<a href="?delno=${boardvo.num }">삭제</a></td>
-	            </tr>
-	        </c:forEach>
-        	<tr>
-        		<td colspan=5>
-        			<c:if test="${pageVO.prev }">
-						<a href="board?page=${pageVO.startPage -1}">[이전페이지그룹] </a>
-					</c:if>
-				<!--  forEach   리스틀 순회,  아래처럼 시작과 끝을 지정하여 반복하는 사용것. -->			
-					<c:forEach begin="${pageVO.startPage}" end="${pageVO.endPage }" var="idx">
-						<c:if test="${pageVO.page == idx}">*</c:if>
-						<a href="board?page=${idx}">${idx}</a>					
-					</c:forEach>	
-					<c:if test="${pageVO.next }">
-						<a href="board?page=${pageVO.endPage + 1 }"> [다음페이지그룹]</a>
-					</c:if>	
-        		</td>
-        	</tr>
-          </tbody>
-        </table>
-        <div id="table_menu">
-          <a href="bwr">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-plus"
-            viewBox="0 0 16 16">
-            <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z" />
-            <path
-              d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
-          </svg>
-        </a>
+
+      <form class="row g-3" action="bwrdo" method="post" encType="multipart/form-data">
+        <div class="col-md-4">
+          <label for="inputState" class="form-label" >놀이터 선택</label>
+         ${boardvo.type }
+        </div>
+        <div class="col-md-3">
+          <label for="inputCity" class="form-label">작성자</label>
+          ${boardvo.username }
+        </div>
+        <div class="col-md-3">
+         
+        </div>
+        <div class="col-12">
+          <label for="inputAddress" class="form-label">제목</label>
+          ${boardvo.title }
         </div>
 
-      </div>
+
+        <div class="form-floating">
+          ${boardvo.content }
+        </div>
+        <div class="mb-3">
+        	<c:forEach items="${attachList }" var="fname">
+        	  <a href="dowload?filename=${fname }">fname</a>
+        	  <!--  <img src=download?filename=${fname }">-->
+        	</c:forEach>
+        </div>
+
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck" name="viewmember" value=1>
+            <label class="form-check-label" for="gridCheck">
+              회원만 보기
+            </label>
+          </div>
+        </div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">확인</button>
+        </div>
+      </form>
     </div>
+
   </div>
-
-
-
+  
   <div id="asidelogin">
     <div id="loginbox">
       <div id="loginup">
@@ -545,8 +531,6 @@
 
     </div>
   </div>
-
-
   <div id="footer">
     <hr>
     김티처 tel. 010-9407-8767
@@ -588,7 +572,7 @@
       </div>
     </div>
   </div>
-  <div>
+  
     <!-- Modal -->
     <!-- Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
@@ -616,7 +600,7 @@
           </div>
         </div>
       </div>
-      <div>
+      </div>
         <!-- Modal -->
 </body>
 

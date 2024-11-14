@@ -1,0 +1,73 @@
+--파일업로드
+필요한 spring 라이브러리: multipart>>pom.xml
+
+*클라이언트
+File>컨트롤러에게 binary파일로 넘겨준다.
+-input type="file" name="file"
+-encType 지정
+
+bbswr...
+파일 업로드시
+파일정보-파일용량(metadata-데이터의 정보), 파일명
+
+html 태그 name이 같을 시 서버에게 배열로 데이터를 전송 
+form 태그에 encType="multipart/form-data" 적어야 서버에 파일 전송가능
+
+servlet-context.xml파일에 빈 설정이 되어야 정상적으로 첨부파일을 전송가능
+
+업로드된 파일의 이름 변경(중복방지) 후 파일 저장하는 과정
+컨트롤러에서 클라이언트로 받은 file을 fileDataUtil객체에게 매개변수로 전달하고,
+파일명만 배열타입으로 리턴받는다.
+이렇게 되면 지정된 위치에 첨부파일을 저장하게 되고
+이제는 리턴받는 변경된 파일명을 디비에 저장하는 작업을 하면 된다.
+
+*컨트롤러
+파일디렉토리저장
+파일명 서비스에게 넘김
+
+컨트롤러는 FileDataUtil객체가 필요하다
+그래서 이 객체를 컨테이너로부터 주입받겟다.
+컨테이너로부터 주입받으려면 FileDataUtil 객체가 컨테이너에 있어야 하는데,
+이를 위해서 @Controller를 작성하였고 Scan설정해줌
+리턴받은 파일명을 디비에 저장하기 위해 기존 BoardVo에 파일명 저장할 변수추가
+
+서비스
+파일명 dao넘김
+
+db
+어떤 게시물 파일인지, 파일명 저장
+
+
+-------------------------------------
+글 제목 클릭시 글 자세히 보기(첨부파일까지)
+
+클라이언트
+v: view
+m: get>> <a>
+p: 글번호 (num)
+
+view: dview.jsp
+
+컨트롤러
+GetMapping
+
+서비스
+public BoardVO (num)
+
+dao
+정의된 selectOne() 사용 
+
+
+------
+첨부파일 가져오기
+
+서비스 
+public List<String> (num)
+
+dao
+public List<String> (num)
+
+mapper
+select fname from kboard_attach where num=#{num}
+
+

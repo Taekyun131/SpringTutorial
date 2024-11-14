@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import www.silver.service.IF_BoardService;
+import www.silver.util.FileDataUtil;
 import www.silver.vo.BoardVO;
 import www.silver.vo.PageVO;
 
@@ -21,6 +23,8 @@ public class BoardController {
 	
 	@Inject
 	IF_BoardService boardservice;
+	@Inject
+	FileDataUtil filedatautil;
 	
 	@GetMapping(value = "board")
 	public String board(Model model, @ModelAttribute PageVO pagevo) throws Exception{	
@@ -55,8 +59,19 @@ public class BoardController {
 		return "board/bbswr";
 	}
 	@PostMapping(value = "bwrdo")
-	public String bwrdo( @ModelAttribute BoardVO boardvo) throws Exception{	
+	public String bwrdo( @ModelAttribute BoardVO boardvo,
+			MultipartFile[] file) throws Exception{		//첨부파일 2개라 배열선언
 //		System.out.println(boardvo.toString());
+		
+		//업로드되는지 확인하는 중간코드-메타데이터확인
+//		System.out.println(file.length);
+//		for(int i=0;i<file.length;i++) {
+//			System.out.println(file[i].getOriginalFilename());
+//		}
+		
+		String [] newFileName=filedatautil.fileUpload(file);
+//		System.out.println(newFileName);
+		boardvo.setFiliename(newFileName);
 		boardservice.addBoard(boardvo);
 //		return "board/bbs";
 		return "redirect:board";
@@ -87,5 +102,16 @@ public class BoardController {
 //		System.out.println(bvo.getTitle());
 		boardservice.modBoard(bvo);
 		return "redirect:board";
+	}
+	@GetMapping(value="view")
+	public String boardView(@RequestParam("no")String no,
+			Model model) throws Exception {
+		BoardVO boardvo=boardservice.getBoard(no);
+		//attach 가져오기
+		List<String> attachList=boardservice.getAttach(no);
+		//view에게 전송할 게시글과 첨부파일 리스트
+		model.addAttribute("boardvo",boardvo);
+		model.addAttribute("attachList",attachList);
+		return "board/dview";
 	}
 }

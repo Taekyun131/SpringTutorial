@@ -24,8 +24,20 @@ public class BoardServiceImpl implements IF_BoardService {
 		}else {
 			boardvo.setViewmember("공개");
 		}
+		//게시글을 kboard에 저장
 		boarddao.insertBoard(boardvo);
 		//dao>>mapper>>DB insert
+		
+		//첨부파일이 있다면 첨부파일을 kboard_attach별도로 저장
+		String[] fname=boardvo.getFiliename();
+		
+		for(int i=0;i<fname.length;i++) {
+			//kboard_attach테이블에 저장하는 코드
+			if(fname[i]!=null) { 
+				
+				boarddao.insertAttach(fname[i]);
+			}
+		}
 	}
 	@Override
 	public List<BoardVO> boardList(PageVO pagevo) throws Exception {
@@ -60,6 +72,16 @@ public class BoardServiceImpl implements IF_BoardService {
 	@Override
 	public int totalCountBoard() throws Exception {
 		return boarddao.cntBoard();
+	}
+	@Override
+	public BoardVO getBoard(String no) throws Exception {
+		return boarddao.selectOne(no);
+		
+	}
+	@Override
+	public List<String> getAttach(String no) throws Exception {
+		
+		return boarddao.selectAllAttach(no);
 	}
 	
 	

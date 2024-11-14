@@ -14,4 +14,6 @@ public interface IF_BoardDAO {
 	public BoardVO selectOne(String modno) throws Exception;
 	public void updateBoard(BoardVO bvo) throws Exception;
 	public int cntBoard() throws Exception;
+	public void insertAttach(String fname) throws Exception;
+	public List<String> selectAllAttach(String no) throws Exception;
 }

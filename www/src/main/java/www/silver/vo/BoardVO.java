@@ -8,7 +8,25 @@ public class BoardVO {
 	String pass;
 	String viewmember;
 	String indate;
+	String[] filiename;
+	String num;
 	
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
+	public String[] getFiliename() {
+		return filiename;
+	}
+
+	public void setFiliename(String[] filiename) {
+		this.filiename = filiename;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVO [type=" + type + ", username=" + username + ", title=" + title + ", content=" + content

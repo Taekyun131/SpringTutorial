@@ -445,7 +445,7 @@
             	selected
             </c:if>>Database</option>
             <option 
-            	<c:if test="${boardvo.type eq 'Database'}">
+            	<c:if test="${boardvo.type eq 'Java'}">
             		selected
             	</c:if>>Java</option>
           </select>
@@ -485,6 +485,7 @@
           </div>
         </div>
         <div class="col-12">
+        	<input type="hidden" name="num" value="${boardvo.num}"/>
           <button type="submit" class="btn btn-primary">수정하기</button>
         </div>
       </form>
