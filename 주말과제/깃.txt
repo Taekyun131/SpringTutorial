@@ -1,0 +1,165 @@
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www
+$ pwd
+/d/Data/240805_tr/spring_WEB/src/www
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www
+$ git init
+Initialized empty Git repository in D:/Data/240805_tr/spring_WEB/src/www/.git/
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www (master)
+$ git config --global user.email "kk@kk.com"
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www (master)
+$ git config --global user.name "kimtr"
+
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www (master)
+$ git config --list
+diff.astextplain.textconv=astextplain
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+http.sslbackend=openssl
+http.sslcainfo=C:/Program Files/Git/mingw64/etc/ssl/certs/ca-bundle.crt
+core.autocrlf=true
+core.fscache=true
+core.symlinks=false
+pull.rebase=false
+credential.helper=manager
+credential.https://dev.azure.com.usehttppath=true
+init.defaultbranch=master
+user.name=kimtr
+user.email=kk@kk.com
+filesystem.Oracle Corporation|1.8.0_261|-1600258359.timestampresolution=1001 microseconds
+filesystem.Oracle Corporation|1.8.0_261|-1600258359.minracythreshold=0 nanoseconds
+filesystem.Oracle Corporation|1.8.0_261|506552450.timestampresolution=1001 microseconds
+filesystem.Oracle Corporation|1.8.0_261|506552450.minracythreshold=0 nanoseconds
+!
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www (master)
+$ git remote add origin https://github.com/KimTrLab/www.git
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www (master)
+$ git remote -v
+origin  https://github.com/KimTrLab/www.git (fetch)
+origin  https://github.com/KimTrLab/www.git (push)
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www (master)
+$ git add .
+warning: in the working copy of '.project', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.settings/org.eclipse.jdt.core.prefs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.settings/org.eclipse.m2e.core.prefs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.settings/org.eclipse.wst.validation.prefs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.settings/org.springframework.ide.eclipse.beans.core.prefs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.settings/org.springframework.ide.eclipse.core.prefs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.springBeans', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'pom.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/java/www/silver/hom/HomeController.java', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/webapp/WEB-INF/spring/root-context.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/webapp/WEB-INF/views/home.jsp', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/main/webapp/WEB-INF/web.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/test/resources/log4j.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'target/m2e-wtp/web-resources/META-INF/maven/www.silver/hom/pom.xml', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'target/test-classes/log4j.xml', LF will be replaced by CRLF the next time Git touches it
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www (master)
+$ git commit -m 'first'
+[master (root-commit) 415233e] first
+ 78 files changed, 4673 insertions(+)
+ create mode 100644 .classpath
+ create mode 100644 .project
+ create mode 100644 .settings/org.eclipse.core.resources.prefs
+ create mode 100644 .settings/org.eclipse.jdt.core.prefs
+ create mode 100644 .settings/org.eclipse.m2e.core.prefs
+ create mode 100644 .settings/org.eclipse.wst.common.component
+ create mode 100644 .settings/org.eclipse.wst.common.project.facet.core.xml
+ create mode 100644 .settings/org.eclipse.wst.validation.prefs
+ create mode 100644 .settings/org.springframework.ide.eclipse.beans.core.prefs
+ create mode 100644 .settings/org.springframework.ide.eclipse.core.prefs
+ create mode 100644 .springBeans
+ create mode 100644 pom.xml
+ create mode 100644 src/main/java/www/silver/dao/BoardDaoImpl.java
+ create mode 100644 src/main/java/www/silver/dao/IF_BoardDao.java
+ create mode 100644 src/main/java/www/silver/dao/IF_MemberDao.java
+ create mode 100644 src/main/java/www/silver/dao/MemberDaoImpl.java
+ create mode 100644 src/main/java/www/silver/hom/BoardController.java
+ create mode 100644 src/main/java/www/silver/hom/HomeController.java
+ create mode 100644 src/main/java/www/silver/hom/LoginController.java
+ create mode 100644 src/main/java/www/silver/hom/MemberController.java
+ create mode 100644 src/main/java/www/silver/interceptor/AuthenticationInterceptor.java
+ create mode 100644 src/main/java/www/silver/service/BoardServiceImpl.java
+ create mode 100644 src/main/java/www/silver/service/IF_BoardService.java
+ create mode 100644 src/main/java/www/silver/service/IF_MemberService.java
+ create mode 100644 src/main/java/www/silver/service/MemberServiceImpl.java
+ create mode 100644 src/main/java/www/silver/util/FileDataUtil.java
+ create mode 100644 src/main/java/www/silver/vo/BoardVO.java
+ create mode 100644 src/main/java/www/silver/vo/MemberVO.java
+ create mode 100644 src/main/java/www/silver/vo/Pagevo.java
+ create mode 100644 src/main/resources/log4j.xml
+ create mode 100644 src/main/resources/log4jdbc.log4j2.properties
+ create mode 100644 src/main/resources/mapper/boardMapper.xml
+ create mode 100644 src/main/resources/mapper/memberMapper.xml
+ create mode 100644 src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml
+ create mode 100644 src/main/webapp/WEB-INF/spring/root-context.xml
+ create mode 100644 src/main/webapp/WEB-INF/views/board/bbs.jsp
+ create mode 100644 src/main/webapp/WEB-INF/views/board/bbswr.jsp
+ create mode 100644 src/main/webapp/WEB-INF/views/board/dview.jsp
+ create mode 100644 src/main/webapp/WEB-INF/views/board/modform.jsp
+ create mode 100644 src/main/webapp/WEB-INF/views/home.jsp
+ create mode 100644 src/main/webapp/WEB-INF/views/include/tailModal.jsp
+ create mode 100644 src/main/webapp/WEB-INF/views/include/top.jsp
+ create mode 100644 src/main/webapp/WEB-INF/views/timeline.jsp
+ create mode 100644 src/main/webapp/WEB-INF/views/viewMsg.jsp
+ create mode 100644 src/main/webapp/WEB-INF/web.xml
+ create mode 100644 src/main/webapp/resources/img/indexmain.PNG
+ create mode 100644 src/main/webapp/resources/img/indexmain.jpg
+ create mode 100644 src/main/webapp/resources/img/java.PNG
+ create mode 100644 src/main/webapp/resources/img/js.PNG
+ create mode 100644 src/main/webapp/resources/img/search.PNG
+ create mode 100644 src/main/webapp/resources/img/we.PNG
+ create mode 100644 src/test/resources/log4j.xml
+ create mode 100644 target/classes/log4j.xml
+ create mode 100644 target/classes/log4jdbc.log4j2.properties
+ create mode 100644 target/classes/mapper/boardMapper.xml
+ create mode 100644 target/classes/mapper/memberMapper.xml
+ create mode 100644 target/classes/www/silver/dao/BoardDaoImpl.class
+ create mode 100644 target/classes/www/silver/dao/IF_BoardDao.class
+ create mode 100644 target/classes/www/silver/dao/IF_MemberDao.class
+ create mode 100644 target/classes/www/silver/dao/MemberDaoImpl.class
+ create mode 100644 target/classes/www/silver/hom/BoardController.class
+ create mode 100644 target/classes/www/silver/hom/HomeController.class
+ create mode 100644 target/classes/www/silver/hom/LoginController.class
+ create mode 100644 target/classes/www/silver/hom/MemberController.class
+ create mode 100644 target/classes/www/silver/interceptor/AuthenticationInterceptor.class
+ create mode 100644 target/classes/www/silver/service/BoardServiceImpl.class
+ create mode 100644 target/classes/www/silver/service/IF_BoardService.class
+ create mode 100644 target/classes/www/silver/service/IF_MemberService.class
+ create mode 100644 target/classes/www/silver/service/MemberServiceImpl.class
+ create mode 100644 target/classes/www/silver/util/FileDataUtil$1.class
+ create mode 100644 target/classes/www/silver/util/FileDataUtil.class
+ create mode 100644 target/classes/www/silver/vo/BoardVO.class
+ create mode 100644 target/classes/www/silver/vo/MemberVO.class
+ create mode 100644 target/classes/www/silver/vo/Pagevo.class
+ create mode 100644 target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
+ create mode 100644 target/m2e-wtp/web-resources/META-INF/maven/www.silver/hom/pom.properties
+ create mode 100644 target/m2e-wtp/web-resources/META-INF/maven/www.silver/hom/pom.xml
+ create mode 100644 target/test-classes/log4j.xml
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www (master)
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www (master)
+$ git push origin master
+Enumerating objects: 115, done.
+Counting objects: 100% (115/115), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (103/103), done.
+Writing objects: 100% (115/115), 2.37 MiB | 2.01 MiB/s, done.
+Total 115 (delta 9), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (9/9), done.
+To https://github.com/KimTrLab/www.git
+ * [new branch]      master -> master
+
+human-teacher@DESKTOP-4J9B8HB MINGW64 /d/Data/240805_tr/spring_WEB/src/www (master)
+$
